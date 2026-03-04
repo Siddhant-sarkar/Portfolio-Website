@@ -72,7 +72,7 @@ export default function Hero() {
                  hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
               >
                 <Link
-                  href="/about"
+                  href="/aboutMe"
                   className="flex items-center justify-center gap-2"
                 >
                   <User className="h-4 w-4" />
