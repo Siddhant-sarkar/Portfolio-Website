@@ -15,26 +15,27 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function ProjectCarousel() {
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <Carousel
         opts={{
           align: "start",
         }}
         className="w-full"
       >
-        <CarouselContent>
+        {/* Carousel content: vertical on mobile, horizontal on md+ */}
+        <CarouselContent className="flex flex-col sm:flex-col md:flex-row gap-4">
           {projects.map((project) => (
             <CarouselItem
               key={project.slug}
-              className="md:basis-1/2 lg:basis-1/2"
+              className="sm:basis-full md:basis-1/2 lg:basis-1/2"
             >
-              <Link href={`/projects/${project.slug}`}>
-                <Card className="cursor-pointer hover:shadow-lg transition">
+              <Link href={`/projects/${project.slug}`} className="block h-full">
+                <Card className="h-full cursor-pointer hover:shadow-xl transition-all duration-300">
                   <CardHeader>
                     <CardTitle className="text-xl">{project.title}</CardTitle>
                   </CardHeader>
 
-                  <CardContent>
+                  <CardContent className="flex flex-col justify-between h-full">
                     <p className="text-sm text-muted-foreground">
                       {project.description}
                     </p>
@@ -45,8 +46,9 @@ export default function ProjectCarousel() {
           ))}
         </CarouselContent>
 
-        <CarouselPrevious />
-        <CarouselNext />
+        {/* Navigation buttons visible on md+ screens */}
+        <CarouselPrevious className="hidden md:flex absolute top-1/2 left-0 transform -translate-y-1/2 bg-white dark:bg-zinc-800 p-2 rounded-full shadow-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer z-10" />
+        <CarouselNext className="hidden md:flex absolute top-1/2 right-0 transform -translate-y-1/2 bg-white dark:bg-zinc-800 p-2 rounded-full shadow-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer z-10" />
       </Carousel>
     </div>
   );
