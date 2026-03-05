@@ -20,8 +20,8 @@ export default function Navbar() {
         {/* Desktop */}
         <nav className="hidden w-full items-center justify-between md:flex">
           <div className="flex items-center gap-8">
-            <Link href="/blog" className="text-sm font-medium hover:opacity-70 transition">
-              Blog
+            <Link href="/projects" className="text-sm font-medium hover:opacity-70 transition">
+              Projects
             </Link>
             <Link href="/music" className="text-sm font-medium hover:opacity-70 transition">
               Music
@@ -64,7 +64,7 @@ export default function Navbar() {
 
             <SheetContent side="right" className="w-full">
               <div className="flex h-full flex-col items-center justify-center gap-8 text-2xl font-semibold">
-                <Link href="/blog" onClick={() => setOpen(false)}>Blog</Link>
+                <Link href="/projects" onClick={() => setOpen(false)}>Projects</Link>
                 <Link href="/music" onClick={() => setOpen(false)}>Music</Link>
                 <Link href="/fitness" onClick={() => setOpen(false)}>Fitness</Link>
                 <Link href="/photos" onClick={() => setOpen(false)}>Photos</Link>
