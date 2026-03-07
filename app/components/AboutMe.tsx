@@ -5,16 +5,18 @@ import NextLink from "next/link";
 import { Mail, Folder } from "lucide-react";
 import Image from "next/image";
 
-type Project = {
-  title: string;
-  description: string;
-  detailedDescription: string[];
-};
-
 type Education = {
   year: string;
   title: string;
   institution: string;
+  logo: string;
+  description: string[];
+};
+
+type Achievement = {
+  year: string;
+  title: string;
+  issuer: string;
   logo: string;
   description: string[];
 };
@@ -87,23 +89,28 @@ const employment: Job[] = [
   },
 ];
 
-const projects: Project[] = [
+const achievements: Achievement[] = [
   {
-    title: "Project A",
-    description: "Designed and built a responsive UI for desktop and mobile.",
-    detailedDescription: [
-      "Designed and built a responsive UI for desktop and mobile.",
-      "Implemented reusable components and cleaner state handling.",
-      "Improved performance and accessibility across key pages.",
+    year: "2025",
+    title: "JPMorgan Chase & Co. - Quantitative Research Job Simulation",
+    issuer: "Forage",
+    logo: "/jpmc.png",
+    description: [
+      "Introductiontion to market microstructure, trading strategies, and risk management through a simulated trading environment.",
+      "Coded a order book imbalance trading strategy in C++, backtested it on historical market data, and analyzed its performance using key financial metrics.",
     ],
   },
   {
-    title: "Project B",
-    description: "Built a machine learning model for financial forecasting.",
-    detailedDescription: [
-      "Built a machine learning model for financial forecasting.",
-      "Trained on historical data and evaluated on test data.",
-      "Improved accuracy and efficiency.",
+    year: "2024",
+    title: "Codeforces - Candidate Master (DIV. 1) Rank",
+    issuer: "Codeforces.com",
+    logo: "/cf.jpg",
+    description: [
+      "Highest rating of 1402 (Specialist) at Codeforces, which is the top site in terms of participation of programmers across the globe.",
+      "Ranked under 75 in the country at CodeChef which ranks among the top sites for competitive programmers. Highest rating of 1928 (4*).",
+      "Achieved a global rank of 562 in CodeChef Starters 95 Division 2",
+      "Achieved a global rank of 1301 among 28000+ participants in Codeforces Round 881 (Div. 3)",
+      "Achieved a global rank of 1856 among 25000+ participants in Codeforces Round 883 (Div. 3)",
     ],
   },
 ];
@@ -113,14 +120,15 @@ export default function AboutMeTimeline() {
     <section className="w-full py-20 bg-white dark:bg-black">
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 md:grid-cols-4 gap-16">
         {/* LEFT COLUMN */}
-        <div className="md:col-span-1 flex flex-col items-center md:items-start">
-          <h2 className="text-6xl md:text-8xl font-extrabold mb-12 tracking-tight">
-            ABOUT ME
-          </h2>
+        <div className="md:col-span-1">
+          <div className="sticky top-0 h-screen flex flex-col items-center md:items-start pt-20">
+            {/* Heading */}
+            <h2 className="text-6xl md:text-8xl font-extrabold mb-12 tracking-tight">
+              ABOUT ME
+            </h2>
 
-          <div className="sticky top-32 w-full flex flex-col items-center md:items-start gap-8">
             {/* Profile */}
-            <div className="w-60 md:w-64">
+            <div className="w-60 md:w-64 mb-10">
               <Image
                 src="/profile.png"
                 alt="Sonny Profile"
@@ -176,52 +184,8 @@ export default function AboutMeTimeline() {
         </div>
 
         {/* RIGHT COLUMN */}
-        <div className="md:col-span-3 flex flex-col gap-20">
+        <div className="md:col-span-3 flex flex-col gap-32">
           <div className="pl-0 md:pl-12">
-            {/* EDUCATION */}
-            <div>
-              <h3 className="text-4xl font-bold mb-8 border-b-2 border-dashed pb-4">
-                Education
-              </h3>
-
-              <div className="flex flex-col gap-12">
-                {education.map((edu, idx) => (
-                  <div key={idx} className="flex gap-6 relative">
-                    <div className="flex flex-col items-center">
-                      <div className="w-16 h-16 relative">
-                        <Image
-                          src={edu.logo}
-                          alt={edu.institution}
-                          fill
-                          className="object-contain rounded-full"
-                        />
-                      </div>
-
-                      {idx !== education.length - 1 && (
-                        <div className="w-0.5 bg-dashed h-full mt-2" />
-                      )}
-                    </div>
-
-                    <div>
-                      <p className="text-sm text-muted-foreground">
-                        {edu.year}
-                      </p>
-
-                      <h4 className="text-2xl font-semibold">{edu.title}</h4>
-
-                      <p className="text-lg">{edu.institution}</p>
-
-                      <ul className="mt-3 list-disc pl-5 text-base text-muted-foreground space-y-1">
-                        {edu.description.map((point, i) => (
-                          <li key={i}>{point}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             {/* EMPLOYMENT */}
             <div>
               <h3 className="text-4xl font-bold mb-8 border-b-2 border-dotted pb-4">
@@ -257,6 +221,96 @@ export default function AboutMeTimeline() {
 
                       <ul className="mt-3 list-disc pl-5 text-base text-muted-foreground space-y-1">
                         {job.description.map((point, i) => (
+                          <li key={i}>{point}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ACHIEVEMENTS */}
+            <div>
+              <h3 className="text-4xl font-bold mb-8 border-b-2 border-dotted pb-4">
+                Achievements
+              </h3>
+
+              <div className="flex flex-col gap-12">
+                {achievements.map((achievement, idx) => (
+                  <div key={idx} className="flex gap-6 relative">
+                    <div className="flex flex-col items-center">
+                      <div className="w-16 h-16 relative">
+                        <Image
+                          src={achievement.logo}
+                          alt={achievement.title}
+                          fill
+                          className="object-contain rounded-full"
+                        />
+                      </div>
+
+                      {idx !== achievements.length - 1 && (
+                        <div className="w-0.5 bg-dotted h-full mt-2" />
+                      )}
+                    </div>
+
+                    <div>
+                      <p className="text-sm text-muted-foreground">
+                        {achievement.year}
+                      </p>
+
+                      <h4 className="text-2xl font-semibold">
+                        {achievement.title}
+                      </h4>
+
+                      <p className="text-lg">{achievement.issuer}</p>
+
+                      <ul className="mt-3 list-disc pl-5 text-base text-muted-foreground space-y-1">
+                        {achievement.description.map((point, i) => (
+                          <li key={i}>{point}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* EDUCATION */}
+            <div>
+              <h3 className="text-4xl font-bold mb-8 border-b-2 border-dashed pb-4">
+                Education
+              </h3>
+
+              <div className="flex flex-col gap-12">
+                {education.map((edu, idx) => (
+                  <div key={idx} className="flex gap-6 relative">
+                    <div className="flex flex-col items-center">
+                      <div className="w-16 h-16 relative">
+                        <Image
+                          src={edu.logo}
+                          alt={edu.institution}
+                          fill
+                          className="object-contain rounded-full"
+                        />
+                      </div>
+
+                      {idx !== education.length - 1 && (
+                        <div className="w-0.5 bg-dashed h-full mt-2" />
+                      )}
+                    </div>
+
+                    <div>
+                      <p className="text-sm text-muted-foreground">
+                        {edu.year}
+                      </p>
+
+                      <h4 className="text-2xl font-semibold">{edu.title}</h4>
+
+                      <p className="text-lg">{edu.institution}</p>
+
+                      <ul className="mt-3 list-disc pl-5 text-base text-muted-foreground space-y-1">
+                        {edu.description.map((point, i) => (
                           <li key={i}>{point}</li>
                         ))}
                       </ul>
