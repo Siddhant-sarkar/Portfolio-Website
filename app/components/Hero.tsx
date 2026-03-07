@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, Linkedin, Youtube, User } from "lucide-react";
+import { Github, Linkedin, Youtube, User, Twitter, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -87,7 +87,7 @@ export default function Hero() {
                  hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
               >
                 <Link
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/siddhant1556/"
                   target="_blank"
                   className="flex items-center justify-center gap-2"
                 >
@@ -103,7 +103,7 @@ export default function Hero() {
                  hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
               >
                 <Link
-                  href="https://youtube.com"
+                  href="https://youtube.com/YoooSonny"
                   target="_blank"
                   className="flex items-center justify-center gap-2"
                 >
@@ -119,12 +119,42 @@ export default function Hero() {
                  hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
               >
                 <Link
-                  href="https://github.com"
+                  href="https://github.com/Siddhant-sarkar"
                   target="_blank"
                   className="flex items-center justify-center gap-2"
                 >
                   <Github className="h-4 w-4" />
                   GitHub
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="h-14 w-full rounded-full border-2 text-sm font-medium transition-colors
+                 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
+              >
+                <Link
+                  href="https://x.com/SarkarSonnig"
+                  target="_blank"
+                  className="flex items-center justify-center gap-2"
+                >
+                  <Twitter className="h-4 w-4" />
+                  X.com
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="h-14 w-full rounded-full border-2 text-sm font-medium transition-colors
+                 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
+              >
+                <Link
+                  href="https://codeforces.com/profile/__V3NU5"
+                  target="_blank"
+                  className="flex items-center justify-center gap-2"
+                >
+                  <Rocket className="h-4 w-4" />
+                  Codeforces
                 </Link>
               </Button>
             </div>
