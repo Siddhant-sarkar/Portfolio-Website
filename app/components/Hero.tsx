@@ -1,5 +1,5 @@
 "use client";
-
+// This component uses client-side features like useState and useEffect
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
