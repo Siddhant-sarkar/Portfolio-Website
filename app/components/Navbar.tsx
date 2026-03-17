@@ -1,29 +1,30 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet"
+import { useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   return (
     <header className="w-full border-b">
       <div className="relative mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-
         {/* Desktop */}
         <nav className="hidden w-full items-center justify-between md:flex">
           <div className="flex items-center gap-8">
-            <Link href="/projects" className="text-sm font-medium hover:opacity-70 transition">
+            <Link
+              href="/projects"
+              className="text-sm font-medium hover:opacity-70 transition"
+            >
               Projects
             </Link>
-            <Link href="/music" className="text-sm font-medium hover:opacity-70 transition">
+            <Link
+              href="/music"
+              className="text-sm font-medium hover:opacity-70 transition"
+            >
               Music
             </Link>
           </div>
@@ -33,10 +34,16 @@ export default function Navbar() {
           </Link>
 
           <div className="flex items-center gap-8">
-            <Link href="/fitness" className="text-sm font-medium hover:opacity-70 transition">
+            <Link
+              href="/fitness"
+              className="text-sm font-medium hover:opacity-70 transition"
+            >
               Fitness
             </Link>
-            <Link href="/photos" className="text-sm font-medium hover:opacity-70 transition">
+            <Link
+              href="/photos"
+              className="text-sm font-medium hover:opacity-70 transition"
+            >
               Photos
             </Link>
           </div>
@@ -64,16 +71,26 @@ export default function Navbar() {
 
             <SheetContent side="right" className="w-full">
               <div className="flex h-full flex-col items-center justify-center gap-8 text-2xl font-semibold">
-                <Link href="/projects" onClick={() => setOpen(false)}>Projects</Link>
-                <Link href="/music" onClick={() => setOpen(false)}>Music</Link>
-                <Link href="/fitness" onClick={() => setOpen(false)}>Fitness</Link>
-                <Link href="/photos" onClick={() => setOpen(false)}>Photos</Link>
+                <Link href="/" onClick={() => setOpen(false)}>
+                  Home
+                </Link>
+                <Link href="/projects" onClick={() => setOpen(false)}>
+                  Projects
+                </Link>
+                <Link href="/music" onClick={() => setOpen(false)}>
+                  Music
+                </Link>
+                <Link href="/fitness" onClick={() => setOpen(false)}>
+                  Fitness
+                </Link>
+                <Link href="/photos" onClick={() => setOpen(false)}>
+                  Photos
+                </Link>
               </div>
             </SheetContent>
           </Sheet>
         </div>
-
       </div>
     </header>
-  )
+  );
 }
