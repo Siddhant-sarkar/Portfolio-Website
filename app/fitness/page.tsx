@@ -17,11 +17,11 @@ export default function FitnessPage() {
       <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 md:grid-cols-4 gap-50">
         {/* LEFT COLUMN (IDENTICAL STRUCTURE TO ABOUT) */}
         <div className="md:col-span-1">
-          <div className="sticky top-0 h-screen flex flex-col items-start md:items-start pt-20">
+          <div className="sticky top-0 h-screen flex flex-col items-center md:items-start pt-20">
             {/* TITLE */}
-            <h1 className="text-6xl md:text-8xl font-extrabold mb-8 tracking-tight">
+            <h2 className="text-6xl md:text-8xl font-extrabold mb-12 tracking-tight">
               FITNESS
-            </h1>
+            </h2>
             {/* IMAGE */}
             <div className="w-full md:w-80 lg:w-90 mb-10">
               <Image
