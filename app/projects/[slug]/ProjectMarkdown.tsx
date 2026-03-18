@@ -2,6 +2,7 @@
 
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
 
 type ProjectMarkdownProps = {
   title: string;
@@ -18,17 +19,22 @@ export default function ProjectMarkdown({
 
       <div
         className="
-          prose prose-zinc max-w-none
-          prose-headings:font-semibold
-          prose-a:text-blue-600 hover:prose-a:text-blue-500
-          prose-pre:rounded-xl prose-pre:bg-zinc-900
-          prose-code:rounded prose-code:bg-zinc-100 prose-code:px-1 prose-code:py-0.5
-          dark:prose-invert dark:prose-a:text-blue-400 dark:prose-pre:bg-zinc-950
-        "
+        prose prose-zinc max-w-none
+        prose-headings:font-semibold
+        prose-a:text-blue-600 hover:prose-a:text-blue-500
+        prose-pre:overflow-x-auto prose-pre:rounded-xl prose-pre:border prose-pre:border-zinc-200 prose-pre:bg-white prose-pre:p-0 prose-pre:text-zinc-900
+        prose-code:before:content-none prose-code:after:content-none
+        [&_:not(pre)>code]:rounded [&_:not(pre)>code]:bg-zinc-100 [&_:not(pre)>code]:px-1 [&_:not(pre)>code]:py-0.5
+      "
       >
         <MDXRemote
           source={source}
-          options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+          options={{
+            mdxOptions: {
+              remarkPlugins: [remarkGfm],
+              rehypePlugins: [rehypeHighlight],
+            },
+          }}
         />
       </div>
     </article>
