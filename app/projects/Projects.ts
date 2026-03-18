@@ -1,9 +1,9 @@
 export const projects = [
   {
-    slug: "quant-trading-engine",
-    title: "Quant Trading Engine",
+    slug: "high-performance-cpp-orderbook",
+    title: "High-Performance C++ Orderbook",
     description:
-      "Algorithmic trading strategies using statistical arbitrage and machine learning.",
+      "A high-performance orderbook implementation in C++ for low-latency trading applications.",
   },
   {
     slug: "3d-shirt-designer",
