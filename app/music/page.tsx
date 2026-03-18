@@ -7,7 +7,9 @@ export default function ComingSoonPage() {
         </h1>
 
         <p className="text-lg text-muted-foreground">
-          This page is currently under construction.
+          This page is currently under construction. It is taking a bit longer
+          to consolidate all of my music knowledge. Thanks for your patience!
+          Meanwhile check out my Youtube.
         </p>
       </div>
     </section>
