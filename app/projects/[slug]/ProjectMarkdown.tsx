@@ -21,9 +21,10 @@ export default function ProjectMarkdown({
           prose prose-zinc max-w-none
           prose-headings:font-semibold
           prose-a:text-blue-600 hover:prose-a:text-blue-500
-          prose-pre:rounded-xl prose-pre:bg-zinc-900
-          prose-code:rounded prose-code:bg-zinc-100 prose-code:px-1 prose-code:py-0.5
-          dark:prose-invert dark:prose-a:text-blue-400 dark:prose-pre:bg-zinc-950
+          prose-pre:rounded-xl prose-pre:border prose-pre:border-zinc-200 prose-pre:bg-zinc-100 prose-pre:text-zinc-900
+          prose-code:before:content-none prose-code:after:content-none
+          [&_:not(pre)>code]:rounded [&_:not(pre)>code]:bg-zinc-100 [&_:not(pre)>code]:px-1 [&_:not(pre)>code]:py-0.5
+          [&_pre_code]:bg-transparent [&_pre_code]:p-0
         "
       >
         <MDXRemote
