@@ -2,34 +2,72 @@
 
 import Image from "next/image";
 
-type SoloOrRiff = {
-  caption: string;
-  src?: string;
-  youtubeEmbedUrl?: string;
-};
+function toYouTubeEmbedUrl(url: string) {
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace("www.", "");
 
-const solosAndRiffs: SoloOrRiff[] = [
+    if (host === "youtu.be") {
+      const videoId = parsed.pathname.replace("/", "");
+      if (videoId) {
+        return `https://www.youtube.com/embed/${videoId}`;
+      }
+      return url;
+    }
+
+    if (host === "youtube.com") {
+      if (parsed.pathname.startsWith("/embed/")) {
+        return `https://www.youtube.com${parsed.pathname}`;
+      }
+
+      if (parsed.pathname === "/watch") {
+        const videoId = parsed.searchParams.get("v");
+        if (videoId) {
+          return `https://www.youtube.com/embed/${videoId}`;
+        }
+      }
+
+      if (parsed.pathname.startsWith("/shorts/")) {
+        const videoId = parsed.pathname.split("/")[2];
+        if (videoId) {
+          return `https://www.youtube.com/embed/${videoId}`;
+        }
+      }
+    }
+
+    return url;
+  } catch {
+    return url;
+  }
+}
+
+const solosAndRiffs = [
   {
-    src: "/music_page/solo-2.mp4",
+    youtubeEmbedUrl:
+      "https://www.youtube.com/embed/RUwrU-GXGoo?si=y_HilgiYPh9EW46Y",
     caption:
       "Random Jam session with my band The Guild, I shreaded a solo over.",
   },
   {
-    src: "/music_page/solo-3.mp4",
+    youtubeEmbedUrl:
+      "https://www.youtube.com/embed/jfbyVzeew7k?si=oIlYLDRTUfyW1ZkI",
     caption:
       "It was snowing outside, so I decided to record a improvise a little bit.",
   },
   {
-    src: "/music_page/solo-5.mp4",
+    youtubeEmbedUrl:
+      "https://www.youtube.com/embed/nsDXuYq0t80?si=TTRGUY4TS3vFZWNz",
     caption: "My Solo over a song Dört Duvar by Canby and Wolker.",
   },
   {
-    src: "/music_page/solo-1.mp4",
+    youtubeEmbedUrl:
+      "https://www.youtube.com/embed/14jBeJxfov4?si=RC8PNXfhtPsA8kQY",
     caption: "Flamenco style solo over a classical Am - G - F -E progression.",
   },
   {
-    src: "/music_page/solo-4.mp4",
-    caption: "If the song `Heartless` by the Weeknd had a guitar solo.",
+    youtubeEmbedUrl:
+      "https://www.youtube.com/embed/yMGigJifaBQ?si=pKxFzpioohdVKx8E",
+    caption: "If the song `HEartless` by the Weeknd had a guitar solo.",
   },
 ];
 
@@ -101,7 +139,7 @@ export default function MusicPage() {
                     {video.youtubeEmbedUrl ? (
                       <div className="aspect-video w-full overflow-hidden rounded-xl border border-border bg-muted">
                         <iframe
-                          src={video.youtubeEmbedUrl}
+                          src={toYouTubeEmbedUrl(video.youtubeEmbedUrl)}
                           title={video.caption}
                           className="h-full w-full"
                           loading="lazy"
@@ -185,52 +223,6 @@ export default function MusicPage() {
                     crafting tones
                   </li>
                 </ul>
-              </div>
-            </div>
-
-            {/* NUTRITION */}
-            <div className="pb-4">
-              <h2 className="text-4xl font-bold mb-8 border-b-2 border-dashed pb-4">
-                Nutrition
-              </h2>
-
-              <div className="grid md:grid-cols-2 gap-10 text-muted-foreground">
-                <div className="space-y-3">
-                  <p className="font-semibold text-foreground">Approach</p>
-                  <p>
-                    Lean bulk with ~200–300 kcal surplus. Focus on whole foods.
-                  </p>
-
-                  <p className="font-semibold text-foreground mt-4">
-                    Daily Structure
-                  </p>
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Oats + eggs</li>
-                    <li>Chicken + rice</li>
-                    <li>Yogurt snack</li>
-                    <li>Whey post workout</li>
-                    <li>Meat + carbs dinner</li>
-                  </ul>
-                </div>
-
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between border-b pb-2">
-                    <span>Protein</span>
-                    <span className="font-medium">140g</span>
-                  </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span>Carbs</span>
-                    <span className="font-medium">250g</span>
-                  </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span>Fats</span>
-                    <span className="font-medium">70g</span>
-                  </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span>Calories</span>
-                    <span className="font-medium">2150</span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
