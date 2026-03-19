@@ -2,7 +2,13 @@
 
 import Image from "next/image";
 
-const solosAndRiffs = [
+type SoloOrRiff = {
+  caption: string;
+  src?: string;
+  youtubeEmbedUrl?: string;
+};
+
+const solosAndRiffs: SoloOrRiff[] = [
   {
     src: "/music_page/solo-2.mp4",
     caption:
@@ -88,16 +94,33 @@ export default function MusicPage() {
 
               <div className="flex flex-col gap-8 text-muted-foreground">
                 {solosAndRiffs.map((video) => (
-                  <figure key={video.src} className="space-y-3">
-                    <video
-                      controls
-                      preload="auto"
-                      playsInline
-                      className="mx-auto h-auto w-auto max-h-[70vh] max-w-full rounded-xl border border-border bg-muted"
-                    >
-                      <source src={video.src} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
+                  <figure
+                    key={video.src ?? video.youtubeEmbedUrl ?? video.caption}
+                    className="space-y-3"
+                  >
+                    {video.youtubeEmbedUrl ? (
+                      <div className="aspect-video w-full overflow-hidden rounded-xl border border-border bg-muted">
+                        <iframe
+                          src={video.youtubeEmbedUrl}
+                          title={video.caption}
+                          className="h-full w-full"
+                          loading="lazy"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          referrerPolicy="strict-origin-when-cross-origin"
+                          allowFullScreen
+                        />
+                      </div>
+                    ) : (
+                      <video
+                        controls
+                        preload="auto"
+                        playsInline
+                        className="mx-auto h-auto w-auto max-h-[70vh] max-w-full rounded-xl border border-border bg-muted"
+                      >
+                        <source src={video.src} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    )}
                     <figcaption className="text-m">{video.caption}</figcaption>
                   </figure>
                 ))}
