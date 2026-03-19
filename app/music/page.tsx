@@ -2,6 +2,22 @@
 
 import Image from "next/image";
 
+type SoloOrRiff = {
+  src: string;
+  caption: string;
+  youtubeEmbedUrl?: string;
+};
+
+function isYouTubeUrl(url: string) {
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.replace("www.", "");
+    return host === "youtube.com" || host === "youtu.be";
+  } catch {
+    return false;
+  }
+}
+
 function toYouTubeEmbedUrl(url: string) {
   try {
     const parsed = new URL(url);
@@ -41,32 +57,27 @@ function toYouTubeEmbedUrl(url: string) {
   }
 }
 
-const solosAndRiffs = [
+const solosAndRiffs: SoloOrRiff[] = [
   {
-    youtubeEmbedUrl:
-      "https://www.youtube.com/embed/RUwrU-GXGoo?si=y_HilgiYPh9EW46Y",
+    src: "https://www.youtube.com/embed/RUwrU-GXGoo?si=y_HilgiYPh9EW46Y",
     caption:
       "Random Jam session with my band The Guild, I shreaded a solo over.",
   },
   {
-    youtubeEmbedUrl:
-      "https://www.youtube.com/embed/jfbyVzeew7k?si=oIlYLDRTUfyW1ZkI",
+    src: "https://www.youtube.com/embed/jfbyVzeew7k?si=oIlYLDRTUfyW1ZkI",
     caption:
       "It was snowing outside, so I decided to record a improvise a little bit.",
   },
   {
-    youtubeEmbedUrl:
-      "https://www.youtube.com/embed/nsDXuYq0t80?si=TTRGUY4TS3vFZWNz",
+    src: "https://www.youtube.com/embed/nsDXuYq0t80?si=TTRGUY4TS3vFZWNz",
     caption: "My Solo over a song Dört Duvar by Canby and Wolker.",
   },
   {
-    youtubeEmbedUrl:
-      "https://www.youtube.com/embed/14jBeJxfov4?si=RC8PNXfhtPsA8kQY",
+    src: "https://www.youtube.com/embed/14jBeJxfov4?si=RC8PNXfhtPsA8kQY",
     caption: "Flamenco style solo over a classical Am - G - F -E progression.",
   },
   {
-    youtubeEmbedUrl:
-      "https://www.youtube.com/embed/yMGigJifaBQ?si=pKxFzpioohdVKx8E",
+    src: "https://www.youtube.com/embed/yMGigJifaBQ?si=pKxFzpioohdVKx8E",
     caption: "If the song `HEartless` by the Weeknd had a guitar solo.",
   },
 ];
@@ -131,37 +142,46 @@ export default function MusicPage() {
               </h2>
 
               <div className="flex flex-col gap-8 text-muted-foreground">
-                {solosAndRiffs.map((video) => (
-                  <figure
-                    key={video.youtubeEmbedUrl ?? video.youtubeEmbedUrl ?? video.caption}
-                    className="space-y-3"
-                  >
-                    {video.youtubeEmbedUrl ? (
-                      <div className="aspect-video w-full overflow-hidden rounded-xl border border-border bg-muted">
-                        <iframe
-                          src={toYouTubeEmbedUrl(video.youtubeEmbedUrl)}
-                          title={video.caption}
-                          className="h-full w-full"
-                          loading="lazy"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          referrerPolicy="strict-origin-when-cross-origin"
-                          allowFullScreen
-                        />
-                      </div>
-                    ) : (
-                      <video
-                        controls
-                        preload="auto"
-                        playsInline
-                        className="mx-auto h-auto w-auto max-h-[70vh] max-w-full rounded-xl border border-border bg-muted"
-                      >
-                        <source src={video.src} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    )}
-                    <figcaption className="text-m">{video.caption}</figcaption>
-                  </figure>
-                ))}
+                {solosAndRiffs.map((video) =>
+                  (() => {
+                    const embedSrc =
+                      video.youtubeEmbedUrl ??
+                      (isYouTubeUrl(video.src)
+                        ? toYouTubeEmbedUrl(video.src)
+                        : undefined);
+
+                    return (
+                      <figure key={video.src} className="space-y-3">
+                        {embedSrc ? (
+                          <div className="aspect-video w-full overflow-hidden rounded-xl border border-border bg-muted">
+                            <iframe
+                              src={embedSrc}
+                              title={video.caption}
+                              className="h-full w-full"
+                              loading="lazy"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              referrerPolicy="strict-origin-when-cross-origin"
+                              allowFullScreen
+                            />
+                          </div>
+                        ) : (
+                          <video
+                            controls
+                            preload="auto"
+                            playsInline
+                            className="mx-auto h-auto w-auto max-h-[70vh] max-w-full rounded-xl border border-border bg-muted"
+                          >
+                            <source src={video.src} type="video/mp4" />
+                            Your browser does not support the video tag.
+                          </video>
+                        )}
+                        <figcaption className="text-m">
+                          {video.caption}
+                        </figcaption>
+                      </figure>
+                    );
+                  })(),
+                )}
               </div>
             </div>
 
