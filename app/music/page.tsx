@@ -4,25 +4,26 @@ import Image from "next/image";
 
 const solosAndRiffs = [
   {
-    src: "/music_page/solo-1.mp4",
-    poster: "/music_page/solo-1-thumb.jpg",
-    caption: "My Solo over a song Dört Duvar by Canby and Wolker.",
-  },
-  {
     src: "/music_page/solo-2.mp4",
-    poster: "/music_page/solo-2-thumb.jpg",
-    caption: "Flamenco Style solo over Am - G - F - E progression. A Classic",
+    caption:
+      "Random Jam session with my band The Guild, I shreaded a solo over.",
   },
   {
     src: "/music_page/solo-3.mp4",
-    poster: "/music_page/solo-3-thumb.jpg",
     caption:
-      "My solo over Heartless by The Weeknd. A mix of blues and jazz phrasing, in Metal style.",
+      "It was snowing outside, so I decided to record a improvise a little bit.",
+  },
+  {
+    src: "/music_page/solo-5.mp4",
+    caption: "My Solo over a song Dört Duvar by Canby and Wolker.",
+  },
+  {
+    src: "/music_page/solo-1.mp4",
+    caption: "Flamenco style solo over a classical Am - G - F -E progression.",
   },
   {
     src: "/music_page/solo-4.mp4",
-    poster: "/music_page/solo-4-thumb.jpg",
-    caption: "Alternate-picking riff at 140 BPM",
+    caption: "If the song `Heartless` by the Weeknd had a guitar solo.",
   },
 ];
 
@@ -90,10 +91,9 @@ export default function MusicPage() {
                   <figure key={video.src} className="space-y-3">
                     <video
                       controls
-                      preload="metadata"
+                      preload="auto"
                       playsInline
-                      poster={video.poster}
-                      className="w-full rounded-xl border border-border bg-muted"
+                      className="mx-auto h-auto w-auto max-h-[70vh] max-w-full rounded-xl border border-border bg-muted"
                     >
                       <source src={video.src} type="video/mp4" />
                       Your browser does not support the video tag.
