@@ -133,7 +133,7 @@ export default function MusicPage() {
               <div className="flex flex-col gap-8 text-muted-foreground">
                 {solosAndRiffs.map((video) => (
                   <figure
-                    key={video.src ?? video.youtubeEmbedUrl ?? video.caption}
+                    key={video.youtubeEmbedUrl ?? video.youtubeEmbedUrl ?? video.caption}
                     className="space-y-3"
                   >
                     {video.youtubeEmbedUrl ? (
