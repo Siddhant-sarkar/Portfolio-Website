@@ -59,6 +59,11 @@ function toYouTubeEmbedUrl(url: string) {
 
 const solosAndRiffs: SoloOrRiff[] = [
   {
+    src: "https://www.youtube.com/watch?v=9VK0dAm-IVY",
+    caption:
+      "My take on iconic solo of `Hotel California` by The Eagles, Harmonic minor and Pentatonic scales over the original chord progression.",
+  },
+  {
     src: "https://www.youtube.com/embed/RUwrU-GXGoo?si=y_HilgiYPh9EW46Y",
     caption:
       "Random Jam session with my band The Guild, I shreaded a solo over.",
