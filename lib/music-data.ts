@@ -62,12 +62,12 @@ export const recordings: Recording[] = [
   {
     title: "Dört Duvar solo",
     caption: "My solo over Dört Duvar by Canby and Wolker.",
-    src: "/music_page/solo-5.mp4",
+    src: "https://www.youtube.com/embed/nsDXuYq0t80?si=TTRGUY4TS3vFZWNz",
   },
   {
     title: "Flamenco improvisation",
     caption: "Flamenco style solo over a classical Am–G–F–E progression.",
-    src: "/music_page/solo-1.mp4",
+    src: "https://www.youtube.com/embed/14jBeJxfov4?si=RC8PNXfhtPsA8kQY",
   },
 ];
 
