@@ -1,258 +1,140 @@
-"use client";
-
-import Image from "next/image";
-
-type SoloOrRiff = {
-  src: string;
-  caption: string;
-  youtubeEmbedUrl?: string;
-};
-
-function isYouTubeUrl(url: string) {
-  try {
-    const parsed = new URL(url);
-    const host = parsed.hostname.replace("www.", "");
-    return host === "youtube.com" || host === "youtu.be";
-  } catch {
-    return false;
-  }
-}
-
-function toYouTubeEmbedUrl(url: string) {
-  try {
-    const parsed = new URL(url);
-    const host = parsed.hostname.replace("www.", "");
-
-    if (host === "youtu.be") {
-      const videoId = parsed.pathname.replace("/", "");
-      if (videoId) {
-        return `https://www.youtube.com/embed/${videoId}`;
-      }
-      return url;
-    }
-
-    if (host === "youtube.com") {
-      if (parsed.pathname.startsWith("/embed/")) {
-        return `https://www.youtube.com${parsed.pathname}`;
-      }
-
-      if (parsed.pathname === "/watch") {
-        const videoId = parsed.searchParams.get("v");
-        if (videoId) {
-          return `https://www.youtube.com/embed/${videoId}`;
-        }
-      }
-
-      if (parsed.pathname.startsWith("/shorts/")) {
-        const videoId = parsed.pathname.split("/")[2];
-        if (videoId) {
-          return `https://www.youtube.com/embed/${videoId}`;
-        }
-      }
-    }
-
-    return url;
-  } catch {
-    return url;
-  }
-}
-
-const solosAndRiffs: SoloOrRiff[] = [
-  {
-    src: "https://www.youtube.com/watch?v=9VK0dAm-IVY",
-    caption:
-      "My take on iconic solo of `Hotel California` by The Eagles, Harmonic minor and Pentatonic scales over the original chord progression.",
-  },
-  {
-    src: "https://www.youtube.com/embed/RUwrU-GXGoo?si=y_HilgiYPh9EW46Y",
-    caption:
-      "Random Jam session with my band The Guild, I shreaded a solo over.",
-  },
-  {
-    src: "https://www.youtube.com/embed/jfbyVzeew7k?si=oIlYLDRTUfyW1ZkI",
-    caption:
-      "It was snowing outside, so I decided to record a improvise a little bit.",
-  },
-  {
-    src: "https://www.youtube.com/embed/nsDXuYq0t80?si=TTRGUY4TS3vFZWNz",
-    caption: "My Solo over a song Dört Duvar by Canby and Wolker.",
-  },
-  {
-    src: "https://www.youtube.com/embed/14jBeJxfov4?si=RC8PNXfhtPsA8kQY",
-    caption: "Flamenco style solo over a classical Am - G - F -E progression.",
-  },
-  {
-    src: "https://www.youtube.com/embed/yMGigJifaBQ?si=pKxFzpioohdVKx8E",
-    caption: "If the song `HEartless` by the Weeknd had a guitar solo.",
-  },
-];
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <p className="text-xl font-semibold">{value}</p>
-      <p className="text-l text-muted-foreground">{label}</p>
-    </div>
-  );
-}
+import Eyebrow from "../components/site/Eyebrow";
+import MonoLabel from "../components/site/MonoLabel";
+import SectionHeading from "../components/site/SectionHeading";
+import Button from "../components/site/Button";
+import YouTubeEmbed from "../components/YouTubeEmbed";
+import { standards, woodshed, recordings, rig } from "@/lib/music-data";
 
 export default function MusicPage() {
   return (
-    <section className="w-full py-20 bg-white dark:bg-black">
-      <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 md:grid-cols-4 gap-50">
-        {/* LEFT COLUMN (IDENTICAL STRUCTURE TO ABOUT) */}
-        <div className="md:col-span-1">
-          <div className="sticky top-0 h-screen flex flex-col items-center md:items-start pt-20">
-            {/* TITLE */}
-            <h2 className="text-6xl md:text-8xl font-extrabold mb-12 tracking-tight">
-              MUSIC
-            </h2>
-            {/* IMAGE */}
-            <div className="w-full md:w-80 lg:w-90 mb-10">
-              <Image
-                src="/music.jpg"
-                alt="Music"
-                width={1800}
-                height={2400}
-                className="rounded-xl object-cover shadow-lg"
-              />
-            </div>
-          </div>
+    <>
+      {/* HERO */}
+      <section className="px-6 md:px-20 pt-16 pb-16 md:pb-20 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+        <div className="md:col-span-8 flex flex-col gap-7">
+          <Eyebrow>Jazz · Neo-soul · Funk</Eyebrow>
+          <h1 className="font-serif font-normal text-6xl sm:text-7xl md:text-8xl lg:text-[128px] leading-[0.95] text-jazz-fg m-0">
+            Chasing the
+            <br />
+            <em className="italic text-jazz-accent">right note.</em>
+          </h1>
         </div>
+        <p className="md:col-span-4 font-sans text-lg leading-relaxed text-jazz-muted m-0">
+          Jazz first, with neo-soul and funk close behind. I&apos;m working
+          toward session-level guitar with a solid theory backbone: voicings
+          I can move, lines that target chord tones, and time that swings.
+        </p>
+      </section>
 
-        {/* RIGHT COLUMN */}
-        <div className="md:col-span-3 flex flex-col gap-22">
-          <div className="pl-0 md:pl-12">
-            <h2 className="text-4xl font-bold mb-8 border-b-2 border-dotted pb-4">
-              My Affiliations
-            </h2>
-            <div className="mb-20 max-w-2xl">
-              <p className="text-muted-foreground leading-relaxed mb-8">
-                Completely self trained. But have a strong foundation in music
-                theory and performance. Started with Rock and Metal, then moved
-                to blues and funk, and currently expoloring jazz.
-              </p>
-              <div className="grid grid-cols-1 gap-6 max-w-md pb-2">
-                <Stat label="Jazz Guitarist" value="Skyliner Big Band." />
-              </div>
-              <div className="grid grid-cols-1 gap-6 max-w-md pb-2">
-                <Stat label="Lead Guitarist" value="The Guild" />
-              </div>
-            </div>
-
-            {/* TRAINING SPLIT */}
-            <div className="pb-4">
-              <h2 className="text-4xl font-bold mb-8 border-b-2 border-dotted pb-4">
-                My Solos and Riffs
-              </h2>
-
-              <div className="flex flex-col gap-8 text-muted-foreground">
-                {solosAndRiffs.map((video) =>
-                  (() => {
-                    const embedSrc =
-                      video.youtubeEmbedUrl ??
-                      (isYouTubeUrl(video.src)
-                        ? toYouTubeEmbedUrl(video.src)
-                        : undefined);
-
-                    return (
-                      <figure key={video.src} className="space-y-3">
-                        {embedSrc ? (
-                          <div className="aspect-video w-full overflow-hidden rounded-xl border border-border bg-muted">
-                            <iframe
-                              src={embedSrc}
-                              title={video.caption}
-                              className="h-full w-full"
-                              loading="lazy"
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                              referrerPolicy="strict-origin-when-cross-origin"
-                              allowFullScreen
-                            />
-                          </div>
-                        ) : (
-                          <video
-                            controls
-                            preload="auto"
-                            playsInline
-                            className="mx-auto h-auto w-auto max-h-[70vh] max-w-full rounded-xl border border-border bg-muted"
-                          >
-                            <source src={video.src} type="video/mp4" />
-                            Your browser does not support the video tag.
-                          </video>
-                        )}
-                        <figcaption className="text-m">
-                          {video.caption}
-                        </figcaption>
-                      </figure>
-                    );
-                  })(),
-                )}
-              </div>
-            </div>
-
-            {/* My Gear */}
-            <div className="pb-4">
-              <h2 className="text-4xl font-bold mb-8 border-b-2 border-dotted pb-4">
-                My Gear
-              </h2>
-
-              <div className="text-muted-foreground space-y-4">
-                <p>
-                  I have a collection of guitars and amps sims that I use for
-                  different styles and tones. My main guitar is a Jackson JS32
-                  Super- Stratocaster.
+      {/* WOODSHED */}
+      <section className="border-t border-jazz-line px-6 md:px-20 py-20">
+        <div className="flex flex-col gap-10">
+          <SectionHeading eyebrow="01 — In the woodshed" title="What I'm practising" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {woodshed.map((item) => (
+              <article
+                key={item.numeral}
+                className="min-h-[248px] p-8 glass-panel flex flex-col gap-3.5"
+              >
+                <Eyebrow>{item.numeral}</Eyebrow>
+                <h3 className="font-serif font-normal text-3xl leading-[1.1] text-jazz-fg m-0">
+                  {item.title}
+                </h3>
+                <p className="font-sans text-[15px] leading-relaxed text-jazz-muted m-0">
+                  {item.description}
                 </p>
-
-                <ul className="list-disc pl-5 space-y-2">
-                  <li>
-                    <strong className="text-foreground">
-                      Electric Guitar :
-                    </strong>{" "}
-                    — Jackson JS32 Super-Stratocaster (HH, 24 frets, compound
-                    radius) | Versatile for rock, metal, blues tones just warm
-                    enough for jazz.
-                  </li>
-                  <li>
-                    <strong className="text-foreground">
-                      Acoustic Guitar :
-                    </strong>{" "}
-                    — Ibanez AEG50-BK (Fishman pickup, cutaway) | Perfect for
-                    unplugged sessions.
-                  </li>
-                  <li>
-                    <strong className="text-foreground">Strings : </strong> —
-                    Ernie Ball Regular Slinky (10-46) | Balanced tension for
-                    both rhythm and lead playing.
-                  </li>
-                  <li>
-                    <strong className="text-foreground">
-                      Audio Interface :{" "}
-                    </strong>{" "}
-                    — Focusrite Scarlett 2i2 (3rd Gen) | Reliable, low-latency
-                    recording
-                  </li>
-                  <li>
-                    <strong className="text-foreground">DAW : </strong> —{" "}
-                    Ableton Live 13 | Intuitive workflow for both composition
-                    and live performances. recording
-                  </li>
-                  <li>
-                    <strong className="text-foreground">Pick : </strong> —{" "}
-                    Gravity Pick - Standar "Tipp" | Oval hole for better grip,
-                    medium thickness for versatility for fast legato runs and
-                    chunky rhythm work.
-                  </li>
-                  <li>
-                    <strong className="text-foreground"> Amp Simp : </strong> —{" "}
-                    Guitar Rig 7 Pro | Wide range of amp models and effects for
-                    crafting tones
-                  </li>
-                </ul>
-              </div>
-            </div>
+              </article>
+            ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* STANDARDS */}
+      <section className="border-t border-jazz-line px-6 md:px-20 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <div className="md:col-span-4">
+            <SectionHeading
+              eyebrow="02 — Repertoire"
+              title="Standards"
+              description="Tunes I can comp and solo through, called at jam sessions."
+            />
+          </div>
+          <div className="md:col-span-8 border-b border-jazz-line">
+            <div className="hidden sm:grid grid-cols-[minmax(0,1fr)_180px_160px] gap-6 h-12 items-center">
+              <MonoLabel>Tune</MonoLabel>
+              <MonoLabel>Key</MonoLabel>
+              <MonoLabel>Feel</MonoLabel>
+            </div>
+            {standards.map((standard) => (
+              <div
+                key={standard.tune}
+                className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_180px_160px] gap-1 sm:gap-6 py-4 sm:h-[76px] sm:items-center border-t border-jazz-line"
+              >
+                <p className="font-serif font-normal text-3xl leading-[1.1] text-jazz-fg m-0">
+                  {standard.tune}
+                </p>
+                <p className="font-mono text-[13px] uppercase tracking-[0.12em] text-jazz-muted m-0">
+                  {standard.key}
+                </p>
+                <p className="font-mono text-[13px] uppercase tracking-[0.12em] text-jazz-muted m-0">
+                  {standard.feel}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* RECORDINGS */}
+      <section className="border-t border-jazz-line px-6 md:px-20 py-20">
+        <div className="flex flex-col gap-10">
+          <SectionHeading eyebrow="03 — Listen" title="Recordings" />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {recordings.map((rec) => (
+              <div key={rec.src} className="flex flex-col gap-4">
+                <YouTubeEmbed src={rec.src} title={rec.title} />
+                <div className="flex flex-col gap-1.5">
+                  <p className="font-serif font-normal text-[28px] leading-[1.1] text-jazz-fg m-0">
+                    {rec.title}
+                  </p>
+                  <MonoLabel>{rec.caption}</MonoLabel>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* RIG */}
+      <section className="border-t border-jazz-line px-6 md:px-20 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <div className="md:col-span-3">
+            <Eyebrow>04 — Rig</Eyebrow>
+          </div>
+          <div className="md:col-span-9 grid grid-cols-1 sm:grid-cols-3 gap-8">
+            {rig.map((item) => (
+              <div key={item.label} className="flex flex-col gap-3 pt-6 border-t border-jazz-line">
+                <Eyebrow>{item.label}</Eyebrow>
+                <h3 className="font-serif font-normal text-3xl leading-[1.1] text-jazz-fg m-0">
+                  {item.title}
+                </h3>
+                <p className="font-sans text-[15px] leading-relaxed text-jazz-muted m-0">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* BANDMATES CTA */}
+      <section className="glass-band border-t border-jazz-line px-6 md:px-20 py-16">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          <h2 className="font-serif font-normal text-4xl md:text-5xl lg:text-[64px] leading-[1.05] text-jazz-fg m-0 max-w-2xl text-center md:text-left">
+            Playing in Hamburg? I&apos;m looking for bandmates.
+          </h2>
+          <Button href="mailto:siddhant.sarkar999@gmail.com">Let&apos;s jam</Button>
+        </div>
+      </section>
+    </>
   );
 }
