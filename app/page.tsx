@@ -3,7 +3,9 @@ import Button from "./components/site/Button";
 import Eyebrow from "./components/site/Eyebrow";
 import MonoLabel from "./components/site/MonoLabel";
 import SectionHeading from "./components/site/SectionHeading";
+import PhotoFrame from "./components/site/PhotoFrame";
 import { projects } from "./projects/Projects";
+import { heroPhotos } from "@/content/photos";
 
 function VinylRing() {
   const radii = [372, 340, 308, 276, 244, 212, 180, 148, 116];
@@ -134,10 +136,10 @@ export default function Home() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden px-6 md:px-20 py-16 md:py-0 md:min-h-[760px] flex items-center">
+      <section className="relative overflow-hidden px-6 md:px-20 py-16 lg:py-0 lg:min-h-[760px] flex items-center">
         <VinylRing />
-        <div className="relative grid grid-cols-1 md:grid-cols-12 gap-6 w-full items-center">
-          <div className="md:col-span-7 flex flex-col gap-8">
+        <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 w-full items-center">
+          <div className="lg:col-span-7 flex flex-col gap-8">
             <Eyebrow>Hamburg · Developer + jazz guitarist</Eyebrow>
             <h1 className="font-serif font-normal text-6xl sm:text-7xl md:text-8xl lg:text-[132px] leading-[0.92] text-jazz-fg m-0">
               Software
@@ -156,8 +158,21 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="md:col-span-5">
-            <FretboardCard />
+          <div className="lg:col-span-5">
+            <PhotoFrame
+              src={heroPhotos.home.src}
+              alt={heroPhotos.home.alt}
+              position={heroPhotos.home.position}
+              caption={heroPhotos.home.caption}
+              priority
+            >
+              <div className="hidden lg:block absolute -left-24 -bottom-6 w-[380px]">
+                <FretboardCard />
+              </div>
+            </PhotoFrame>
+            <div className="lg:hidden mt-6">
+              <FretboardCard />
+            </div>
           </div>
         </div>
       </section>

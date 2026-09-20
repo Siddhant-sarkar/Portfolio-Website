@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import Eyebrow from "../components/site/Eyebrow";
 import MonoLabel from "../components/site/MonoLabel";
 import SectionHeading from "../components/site/SectionHeading";
+import PhotoFrame from "../components/site/PhotoFrame";
 import {
   stats,
   split,
@@ -9,11 +10,12 @@ import {
   goals,
   recentSessions,
 } from "@/lib/fitness-data";
+import { heroPhotos } from "@/content/photos";
 
 function StatTile({ big, label }: { big: string; label: string }) {
   return (
-    <div className="min-h-[170px] p-6 glass-panel flex flex-col justify-between">
-      <p className="font-serif font-normal text-5xl sm:text-6xl md:text-[72px] leading-none text-jazz-accent m-0">
+    <div className="min-h-[150px] p-5 glass-panel flex flex-col justify-between">
+      <p className="font-serif font-normal text-4xl sm:text-5xl lg:text-6xl xl:text-[72px] leading-none text-jazz-accent m-0">
         {big}
       </p>
       <p className="font-sans text-sm leading-snug text-jazz-muted m-0">{label}</p>
@@ -25,24 +27,34 @@ export default function FitnessPage() {
   return (
     <>
       {/* HERO */}
-      <section className="px-6 md:px-20 py-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        <div className="md:col-span-7 flex flex-col gap-7">
-          <Eyebrow>Strength · Hypertrophy</Eyebrow>
-          <h1 className="font-serif font-normal text-6xl sm:text-7xl md:text-8xl lg:text-[120px] leading-[0.95] text-jazz-fg m-0">
-            Built for the
-            <br />
-            <em className="italic text-jazz-accent">V-taper.</em>
-          </h1>
-          <p className="font-sans text-lg leading-relaxed text-jazz-muted m-0 max-w-xl">
-            Compound-heavy sessions, minimal accessory volume, and a split
-            trimmed to fit real life. Efficiency is the constraint.
-          </p>
-        </div>
-        <div className="md:col-span-5 grid grid-cols-2 gap-4">
-          <StatTile big={stats.trainingDaysPerWeek} label="training days a week" />
-          <StatTile big={stats.coreLiftsLabel} label="core lifts: squat, bench, deadlift" />
-          <StatTile big={stats.bodyweightKg} label="current bodyweight, kg" />
-          <StatTile big={stats.yearsTraining} label="years of training" />
+      <section className="px-6 md:px-20 py-16 lg:py-0 lg:min-h-[760px] flex items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 w-full items-center">
+          <div className="lg:col-span-7 flex flex-col gap-7">
+            <Eyebrow>Strength · Hypertrophy</Eyebrow>
+            <h1 className="font-serif font-normal text-6xl sm:text-7xl md:text-8xl lg:text-[120px] leading-[0.95] text-jazz-fg m-0">
+              Built for the
+              <br />
+              <em className="italic text-jazz-accent">V-taper.</em>
+            </h1>
+            <p className="font-sans text-lg leading-relaxed text-jazz-muted m-0 max-w-xl">
+              Compound-heavy sessions, minimal accessory volume, and a split
+              trimmed to fit real life. Efficiency is the constraint.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <StatTile big={stats.trainingDaysPerWeek} label="training days a week" />
+              <StatTile big={stats.coreLiftsLabel} label="core lifts: squat, bench, deadlift" />
+              <StatTile big={stats.bodyweightKg} label="current bodyweight, kg" />
+              <StatTile big={stats.yearsTraining} label="years of training" />
+            </div>
+          </div>
+          <div className="lg:col-span-5">
+            <PhotoFrame
+              src={heroPhotos.fitness.src}
+              alt={heroPhotos.fitness.alt}
+              position={heroPhotos.fitness.position}
+              caption={heroPhotos.fitness.caption}
+            />
+          </div>
         </div>
       </section>
 

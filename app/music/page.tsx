@@ -3,26 +3,38 @@ import MonoLabel from "../components/site/MonoLabel";
 import SectionHeading from "../components/site/SectionHeading";
 import Button from "../components/site/Button";
 import YouTubeEmbed from "../components/YouTubeEmbed";
+import PhotoFrame from "../components/site/PhotoFrame";
 import { standards, woodshed, recordings, rig } from "@/lib/music-data";
+import { heroPhotos } from "@/content/photos";
 
 export default function MusicPage() {
   return (
     <>
       {/* HERO */}
-      <section className="px-6 md:px-20 pt-16 pb-16 md:pb-20 grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
-        <div className="md:col-span-8 flex flex-col gap-7">
-          <Eyebrow>Jazz · Neo-soul · Funk</Eyebrow>
-          <h1 className="font-serif font-normal text-6xl sm:text-7xl md:text-8xl lg:text-[128px] leading-[0.95] text-jazz-fg m-0">
-            Chasing the
-            <br />
-            <em className="italic text-jazz-accent">right note.</em>
-          </h1>
+      <section className="px-6 md:px-20 py-16 lg:py-0 lg:min-h-[760px] flex items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 w-full items-center">
+          <div className="lg:col-span-7 flex flex-col gap-7">
+            <Eyebrow>Jazz · Neo-soul · Funk</Eyebrow>
+            <h1 className="font-serif font-normal text-6xl sm:text-7xl md:text-8xl lg:text-[128px] leading-[0.95] text-jazz-fg m-0">
+              Chasing the
+              <br />
+              <em className="italic text-jazz-accent">right note.</em>
+            </h1>
+            <p className="font-sans text-lg leading-relaxed text-jazz-muted m-0 max-w-xl">
+              Jazz first, with neo-soul and funk close behind. I&apos;m working
+              toward session-level guitar with a solid theory backbone: voicings
+              I can move, lines that target chord tones, and time that swings.
+            </p>
+          </div>
+          <div className="lg:col-span-5">
+            <PhotoFrame
+              src={heroPhotos.music.src}
+              alt={heroPhotos.music.alt}
+              position={heroPhotos.music.position}
+              caption={heroPhotos.music.caption}
+            />
+          </div>
         </div>
-        <p className="md:col-span-4 font-sans text-lg leading-relaxed text-jazz-muted m-0">
-          Jazz first, with neo-soul and funk close behind. I&apos;m working
-          toward session-level guitar with a solid theory backbone: voicings
-          I can move, lines that target chord tones, and time that swings.
-        </p>
       </section>
 
       {/* WOODSHED */}
