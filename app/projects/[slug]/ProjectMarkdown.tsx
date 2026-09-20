@@ -16,17 +16,22 @@ export default function ProjectMarkdown({
   source,
 }: ProjectMarkdownProps) {
   return (
-    <article className="mx-auto max-w-3xl px-6 py-10">
-      <h1 className="mb-8 text-3xl font-bold tracking-tight">{title}</h1>
+    <article className="mx-auto max-w-3xl px-6 md:px-20 py-16">
+      <h1 className="mb-10 font-serif font-normal text-5xl md:text-6xl leading-[1.05] text-jazz-fg">
+        {title}
+      </h1>
 
       <div
         className="
-        prose prose-zinc max-w-none
-        prose-headings:font-semibold
-        prose-a:text-blue-600 hover:prose-a:text-blue-500
-        prose-pre:overflow-x-auto prose-pre:rounded-xl prose-pre:border prose-pre:border-zinc-200 prose-pre:bg-white prose-pre:text-zinc-900
+        prose prose-invert max-w-none
+        prose-headings:font-sans prose-headings:font-semibold
+        prose-p:text-jazz-muted prose-li:text-jazz-muted
+        prose-strong:text-jazz-fg
+        prose-a:text-jazz-accent hover:prose-a:opacity-78
+        prose-pre:overflow-x-auto prose-pre:rounded-[6px] prose-pre:border prose-pre:border-jazz-line prose-pre:bg-jazz-surface prose-pre:text-jazz-fg
         prose-code:before:content-none prose-code:after:content-none
-        [&_:not(pre)>code]:rounded [&_:not(pre)>code]:bg-zinc-100 [&_:not(pre)>code]:px-1 [&_:not(pre)>code]:py-0.5
+        prose-hr:border-jazz-line
+        [&_:not(pre)>code]:rounded [&_:not(pre)>code]:bg-jazz-surface [&_:not(pre)>code]:px-1 [&_:not(pre)>code]:py-0.5
         [&_pre_code]:px-4 [&_pre_code]:py-4
       "
       >
