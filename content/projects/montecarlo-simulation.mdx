@@ -1,0 +1,128 @@
+---
+title: Monte Carlo Simulation Engine
+---
+
+# Monte Carlo Simulation Engine
+
+A multi-threaded C++17 quantitative finance engine that prices options and measures portfolio risk using Monte Carlo methods. It implements five stochastic models (GBM, Heston, Merton jump-diffusion, CIR, and correlated multi-asset GBM), four variance-reduction techniques, and a full statistics/risk suite (VaR, CVaR, Sharpe, Sortino, bootstrap confidence intervals). Every run also renders an interactive HTML report with charts of the simulated paths, payoff distributions, and convergence behavior.
+
+[Github](https://github.com/Siddhant-sarkar/Montecarlo-Simulation)
+
+On an 8-core machine it simulates the 10M-path European call in ~75ms (~130M paths/sec) and runs the full 8-part suite — roughly 34M simulated paths across all models — in about 33 seconds.
+
+---
+
+## Features
+
+**Stochastic models**
+
+- Geometric Brownian Motion (GBM) with exact log-normal sampling
+- Heston stochastic volatility, via the Broadie-Kaya quadratic-exponential (QE) scheme
+- Merton jump-diffusion (log-normal jumps on top of GBM)
+- Cox-Ingersoll-Ross (CIR) mean-reverting short-rate model
+- Correlated multi-asset GBM via Cholesky decomposition, for portfolio simulation
+- Closed-form Black-Scholes pricing and Greeks (delta, gamma, vega, theta, rho) as a validation baseline
+
+**Payoffs priced**
+
+- European calls/puts
+- Arithmetic Asian calls (with a geometric-Asian control variate)
+- Up-and-out calls and down-and-out puts (barrier options)
+- Lookback and digital options
+
+**Variance reduction** (compared head-to-head in one run)
+
+- Plain Monte Carlo (baseline)
+- Antithetic variates
+- Quasi-Monte Carlo via a Halton low-discrepancy sequence
+- Control variates (analytic Black-Scholes / geometric-Asian control)
+
+**Risk & statistics**
+
+- Mean, standard error, percentiles, and 95% confidence intervals
+- Value-at-Risk and Conditional VaR (95% / 99%)
+- Annualized Sharpe and Sortino ratios
+- Bootstrap confidence intervals
+- Convergence analysis (running mean vs. path count)
+- VaR term structure (scaled across multiple holding-period horizons)
+
+**Engine internals**
+
+- Xoshiro256++ PRNG with per-thread jump-ahead streams for reproducible parallel runs
+- Acklam's rational approximation for the inverse normal CDF (used by the Halton/QMC path)
+- Work is sharded across `std::thread::hardware_concurrency()` threads with no locking on the hot path
+- Self-contained HTML report generator with embedded interactive charts — no external services or JS build step
+
+---
+
+## Sample output
+
+Numbers from an actual run on an 8-core machine (S0=100, K=100, r=5%, q=2%, σ=20%, T=1y):
+
+| Simulation | Result | Std. error | Paths |
+| --- | --- | --- | --- |
+| GBM European call (MC) | 9.2182 | 0.0044 | 10,000,000 |
+| GBM European call (Black-Scholes) | 9.2270 | — | analytic |
+| Heston stochastic-vol call | 10.2737 | 0.0067 | 5,000,000 |
+| Asian arithmetic call (control variate) | 6.7068 | 0.0001 | 5,000,000 |
+| Up-and-out call (B=130) | 3.3491 | 0.0028 | 5,000,000 |
+| Down-and-out put (B=80) | 1.8775 | 0.0018 | 5,000,000 |
+| Merton jump-diffusion call | 10.6496 | 0.0065 | 5,000,000 |
+
+Variance-reduction comparison (500K paths each, standard-error reduction vs. plain MC):
+
+| Method | Std. error | Reduction |
+| --- | --- | --- |
+| Plain MC | 0.01959 | baseline |
+| Antithetic variates | 0.01041 | ×1.88 |
+| Quasi-MC (Halton) | 0.02046 | ×0.96 |
+| Control variate | 0.01226 | ×1.60 |
+
+10-asset correlated portfolio, 1-day horizon (1,000,000 paths):
+
+| Metric | Value |
+| --- | --- |
+| VaR 95% | $22.36 |
+| VaR 99% | $31.66 |
+| CVaR 95% | $28.06 |
+| CVaR 99% | $36.21 |
+| Sharpe (annualized) | 0.549 |
+| Sortino (annualized) | 0.560 |
+
+Each run also prints an ASCII histogram preview of the payoff and short-rate distributions directly in the terminal, and writes a full interactive `report.html` with path charts, histograms, and a convergence plot.
+
+---
+
+## Project structure
+
+```
+montecarlo/
+├── Makefile                  # build config (g++, -O3, -march=native, pthreads)
+├── src/main.cpp               # entry point: runs all 8 simulations, prints results
+└── include/
+    ├── rng.hpp                 # Xoshiro256++ PRNG, Halton QMC sequence, inverse-normal
+    ├── models.hpp              # GBM, Heston, Merton, CIR, multi-asset, Black-Scholes, payoffs
+    ├── statistics.hpp          # Stats, VaR/CVaR, Sharpe/Sortino, bootstrap CI, histograms
+    └── visualizer.hpp          # HTML report generator with embedded charts
+```
+
+---
+
+## How it works
+
+Each simulation shards its path count evenly across the machine's hardware threads. Every worker thread seeds its own Xoshiro256++ generator and calls `long_jump()` a number of times equal to its thread index, giving each thread a statistically independent, non-overlapping random stream — so results are reproducible and don't depend on thread scheduling. Path generation, payoff evaluation, and discounting all happen inline in the worker lambda with no locking, which is what gets the GBM European-call simulation to ~130M paths/sec on 8 cores.
+
+The Heston paths use the Broadie-Kaya QE scheme to sample the variance process without the negative-variance issues of a naive Euler discretization. The CIR short-rate model uses a similar reflection/absorption scheme to stay non-negative. The 10-asset portfolio simulation draws correlated normals via a Cholesky factorization of the target correlation matrix.
+
+---
+
+## Building it
+
+Requires a C++17 compiler (`g++` or `clang++`) and `make`. On macOS, OpenMP is optional — the Makefile auto-detects `libomp` via `pkg-config` if installed, but parallelism comes from `std::thread`, so the engine runs fine without it.
+
+```bash
+cd montecarlo
+make            # builds ./montecarlo
+make run        # builds, then runs the full simulation suite
+make report     # runs, then opens report.html in your browser
+```

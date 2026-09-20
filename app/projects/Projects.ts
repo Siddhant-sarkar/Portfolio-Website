@@ -24,11 +24,11 @@ export const projects: Project[] = [
     tags: ["Python", "ARIMA", "XGBoost", "Time Series"],
   },
   {
-    slug: "3d-shirt-designer",
-    title: "3D Shirt Designer",
-    category: "Web",
+    slug: "montecarlo-simulation",
+    title: "Monte Carlo Simulation Engine",
+    category: "Systems",
     description:
-      "A realtime 3D shirt customization tool with product listing, cart and order flow, built with Three.js and React Three Fiber.",
-    tags: ["React", "Three.js", "Next.js"],
+      "A multi-threaded C++17 engine pricing options under five stochastic models (GBM, Heston, Merton, CIR, multi-asset) with variance reduction and a full VaR/CVaR risk suite. ~130M paths/sec on 8 cores.",
+    tags: ["C++17", "Monte Carlo", "Multithreading", "Quant Finance"],
   },
 ];
