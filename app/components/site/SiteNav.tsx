@@ -22,7 +22,7 @@ export default function SiteNav() {
         className="flex items-baseline gap-3.5 no-underline text-jazz-fg"
       >
         <span className="font-serif text-[26px] md:text-[32px] leading-none">
-          Sid Sarkar
+          Sonny Sarkar
         </span>
         <span className="hidden sm:inline font-mono text-xs uppercase tracking-[0.12em] text-jazz-muted">
           Dev · Guitar

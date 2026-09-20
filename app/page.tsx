@@ -145,7 +145,7 @@ export default function Home() {
               that <em className="italic text-jazz-accent">swings.</em>
             </h1>
             <p className="font-sans text-lg md:text-xl leading-relaxed text-jazz-muted m-0 max-w-xl">
-              I&apos;m Sid Sarkar, a developer and M.Sc. Data Science student in
+              I&apos;m Sonny Sarkar, a developer and M.Sc. Data Science student in
               Hamburg. I build real-time systems and data tools, and I play
               jazz guitar.
             </p>

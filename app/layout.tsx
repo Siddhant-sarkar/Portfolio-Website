@@ -25,9 +25,9 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Sid Sarkar — Dev · Guitar",
+  title: "Sonny Sarkar — Dev · Guitar",
   description:
-    "Sid Sarkar: developer and M.Sc. Data Science student in Hamburg. Real-time systems, data tools, and jazz guitar.",
+    "Sonny Sarkar: developer and M.Sc. Data Science student in Hamburg. Real-time systems, data tools, and jazz guitar.",
 };
 
 export default function RootLayout({
