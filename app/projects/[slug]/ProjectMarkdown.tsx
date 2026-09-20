@@ -31,6 +31,7 @@ export default function ProjectMarkdown({
         prose-pre:overflow-x-auto prose-pre:rounded-[6px] prose-pre:border prose-pre:border-jazz-line prose-pre:bg-jazz-surface prose-pre:text-jazz-fg
         prose-code:before:content-none prose-code:after:content-none
         prose-hr:border-jazz-line
+        prose-table:block prose-table:overflow-x-auto
         [&_:not(pre)>code]:rounded [&_:not(pre)>code]:bg-jazz-surface [&_:not(pre)>code]:px-1 [&_:not(pre)>code]:py-0.5
         [&_pre_code]:px-4 [&_pre_code]:py-4
       "

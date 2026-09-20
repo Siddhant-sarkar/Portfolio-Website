@@ -13,7 +13,7 @@ import {
 function StatTile({ big, label }: { big: string; label: string }) {
   return (
     <div className="min-h-[170px] p-6 glass-panel flex flex-col justify-between">
-      <p className="font-serif font-normal text-6xl md:text-[72px] leading-none text-jazz-accent m-0">
+      <p className="font-serif font-normal text-5xl sm:text-6xl md:text-[72px] leading-none text-jazz-accent m-0">
         {big}
       </p>
       <p className="font-sans text-sm leading-snug text-jazz-muted m-0">{label}</p>
@@ -166,16 +166,32 @@ export default function FitnessPage() {
               </p>
             ) : (
               recentSessions.map((entry, i) => (
-                <div
-                  key={i}
-                  className="grid grid-cols-2 md:grid-cols-[130px_110px_minmax(0,1fr)_140px_120px_minmax(0,1.2fr)] gap-2 md:gap-4 py-4 md:h-16 md:items-center border-t border-jazz-line"
-                >
-                  <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.date}</p>
-                  <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.session}</p>
-                  <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.lift}</p>
-                  <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.setsReps}</p>
-                  <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.weight}</p>
-                  <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.notes}</p>
+                <div key={i} className="border-t border-jazz-line">
+                  {/* Mobile: labeled stack */}
+                  <div className="md:hidden grid grid-cols-[80px_minmax(0,1fr)] gap-x-4 gap-y-2 py-4">
+                    <MonoLabel>Date</MonoLabel>
+                    <p className="font-sans text-base leading-snug text-jazz-fg m-0">{entry.date}</p>
+                    <MonoLabel>Session</MonoLabel>
+                    <p className="font-sans text-base leading-snug text-jazz-fg m-0">{entry.session}</p>
+                    <MonoLabel>Lift</MonoLabel>
+                    <p className="font-sans text-base leading-snug text-jazz-fg m-0">{entry.lift}</p>
+                    <MonoLabel>Sets × reps</MonoLabel>
+                    <p className="font-sans text-base leading-snug text-jazz-fg m-0">{entry.setsReps}</p>
+                    <MonoLabel>Weight</MonoLabel>
+                    <p className="font-sans text-base leading-snug text-jazz-fg m-0">{entry.weight}</p>
+                    <MonoLabel>Notes</MonoLabel>
+                    <p className="font-sans text-base leading-snug text-jazz-fg m-0">{entry.notes}</p>
+                  </div>
+
+                  {/* Desktop: table row */}
+                  <div className="hidden md:grid grid-cols-[130px_110px_minmax(0,1fr)_140px_120px_minmax(0,1.2fr)] gap-4 h-16 items-center">
+                    <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.date}</p>
+                    <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.session}</p>
+                    <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.lift}</p>
+                    <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.setsReps}</p>
+                    <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.weight}</p>
+                    <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.notes}</p>
+                  </div>
                 </div>
               ))
             )}
