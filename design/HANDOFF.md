@@ -56,6 +56,37 @@ Every card, panel, nav bar, band, outline button, chip and photo tile is frosted
 - Backdrop-filter only shows the blobs if no ancestor is a "backdrop root" (an ancestor with `filter`, `opacity < 1`, `mask`, `mix-blend-mode`, or `will-change` on those). Keep the glass elements' ancestors clean, and keep the blob layer as a sibling behind the page content, not a parent.
 - Contrast: text on glass must stay 4.5:1 or better. Body text uses `text` and `muted` only.
 
+## Photos in the heroes (Home, Music, Fitness)
+
+Each of the three pages has one real photo in its hero, on the right (grid-column 8 / span 5, 519 x 640, 4:5 portrait). The repo already has the source images, so use them, not the design's placeholders:
+
+| Page | Photo | Source in `public/` | `object-position` | Caption chip |
+|---|---|---|---|---|
+| Home | Portrait | `profile.png` | `50% 30%` | Sid Sarkar · Hamburg |
+| Music | Playing guitar | `music.jpg` | `38% 42%` | Practice |
+| Fitness | Physique | `fitness.jpg` | `50% 8%` | Training |
+
+(`hero.jpg`, the Memoji, is not used in the new design.) The `/_blob/...` image URLs inside the `*.dc.html` files only work inside the design tool; ignore them and use `next/image` with the repo files.
+
+Build one shared `PhotoFrame` component (props: `src`, `alt`, `position`, `caption`, optional `children` for an overlay). Spec:
+
+- Outer box 519 x 640 (`aspect-ratio: 4 / 5`, full width of its 5 columns), `position: relative`.
+- Offset plate behind the photo: soft-glass rectangle, 22px radius, shifted 22px right and 22px down (`translate(22px, 22px)`), so the photo looks like it sits on a frosted card.
+- Photo: `next/image` with `fill`, `object-fit: cover`, `object-position` per image (above), inside a 22px-radius `overflow: hidden` wrapper. Warm grade so any photo sits in the palette: `filter: saturate(.92) contrast(1.04) brightness(.94)`. Put the filter on the `<img>` only, never on an ancestor of glass elements (backdrop root, see Glass).
+- Bottom fade over the photo: `linear-gradient(to top, rgba(14,12,10,.55), transparent 40%)`, so the caption chip stays readable.
+- Glass rim on top of the photo: 1px `rgba(255,244,228,.26)` border with the inset highlight `inset 0 1px 0 rgba(255,255,255,.42)`, 22px radius, `pointer-events: none`.
+- Caption chip, bottom-left, 20px inset: glass pill, IBM Plex Mono 12px uppercase, 0.12em tracking, with a small brass dot.
+- Use `priority` on the Home photo (above the fold), `sizes="(min-width: 1024px) 519px, 100vw"` everywhere.
+- Responsive: under ~1024px the photo drops below the hero text at full column width (max 480px, centered); under ~768px drop the offset plate to 12px.
+
+Storage and export guidance:
+
+- Keep photos in `public/images/` (or keep the current `public/` names), one file per photo, and describe them in one typed array, e.g. `content/photos.ts` with `{ src, alt, position, caption, width, height }`. The hero and the `/photos` gallery both read from it, so swapping an image is a one-line change.
+- Export at 2x the display size: about 1040 px wide, JPEG or WebP, quality around 80, 4:5 or looser (the frame crops with `object-fit: cover`, so anything close to portrait works). `next/image` will serve the smaller sizes.
+- Strip EXIF/GPS before committing (re-export, or `exiftool -all= file.jpg`). Phone photos carry the location they were taken at.
+- Write real `alt` text, e.g. "Sid Sarkar smiling at a desk", "Sid playing an electric guitar", "Sid after a training session". Captions are decoration, alt is what screen readers read.
+- The current Home image is a casual desk photo. The frame is built for a proper headshot: when one exists, drop it in as `public/profile.png` (or change the path in `content/photos.ts`) and adjust `object-position` so the eyes sit about a third from the top.
+
 ## Type
 
 Google Fonts: Instrument Serif (regular + italic), DM Sans (400/500/600), IBM Plex Mono (400/500). Load with `next/font/google`.
@@ -92,11 +123,11 @@ Keep text contrast: body text must stay at 4.5:1 or better over the brightest bl
 
 ## Page notes
 
-**Home**: hero with 3-line H1 "Software / that / swings." (italic brass "swings."), intro paragraph, two buttons (See the projects, Listen to the music). Right side: a Dm7 drop-2 fretboard diagram card (inline SVG, frets 5 to 8, notes F/C/A/D, D is the filled root) over a decorative vinyl-record ring graphic. Then About (large serif paragraph + three facts: Studying, Experience, Looking for), "Four rooms" tiles linking to the sub-pages, "Selected work" 4-row list linking to `/projects`, and a centred contact band.
+**Home**: hero with 3-line H1 "Software / that / swings." (italic brass "swings."), intro paragraph, two buttons (See the projects, Listen to the music) on the left. Right side: the portrait in the `PhotoFrame` (see Photos), with the Dm7 drop-2 fretboard diagram card (inline SVG, frets 5 to 8, notes F/C/A/D, D is the filled root) floating over its lower-left corner as glass (about 380px wide, overlapping the photo edge by 96px to the left and 24px below), and the decorative vinyl-record ring graphic behind. Then About (large serif paragraph + three facts: Studying, Experience, Looking for), "Four rooms" tiles linking to the sub-pages, "Selected work" 4-row list linking to `/projects`, and a centred contact band.
 
-**Music**: hero "Chasing the right note.", "In the woodshed" 3x2 practice-topic cards, Standards table (Tune / Key / Feel; Blue Bossa is the only real row), Recordings (3 video tiles; use the existing YouTube embed component), Rig (guitar, amp and pedals, software), bandmates call to action.
+**Music**: hero (760px tall) with eyebrow, "Chasing the right note." and a paragraph on the left and the guitar photo in the `PhotoFrame` on the right, "In the woodshed" 3x2 practice-topic cards, Standards table (Tune / Key / Feel; Blue Bossa is the only real row), Recordings (3 video tiles; use the existing YouTube embed component), Rig (guitar, amp and pedals, software), bandmates call to action.
 
-**Fitness**: hero "Built for the V-taper." with 2x2 stat tiles, 7-day split cards (Push, Pull, Legs, Rest, Upper, Lower, Rest; anchors Bench press / Deadlift / Squat), "big three" lift cards with PR, best set and goal, four goals, and a "Recent sessions" log table (Date / Session / Lift / Sets x reps / Weight / Notes). Drive the lifts and log from data (MDX or a typed array) so entries can be added without touching the layout.
+**Fitness**: hero (760px tall) with "Built for the V-taper.", a paragraph and a row of 4 stat tiles on the left, and the physique photo in the `PhotoFrame` on the right, 7-day split cards (Push, Pull, Legs, Rest, Upper, Lower, Rest; anchors Bench press / Deadlift / Squat), "big three" lift cards with PR, best set and goal, four goals, and a "Recent sessions" log table (Date / Session / Lift / Sets x reps / Weight / Notes). Drive the lifts and log from data (MDX or a typed array) so entries can be added without touching the layout.
 
 **Projects**: filter chips (All, Web, Data & ML, Music tools) that filter a 3-column card grid client-side, plus a "Showing N projects" count. Each card: screenshot area, category label, title, description, tag pills, "View project" link. Keep the project list in a typed array. The design's six projects: Life-tracking dashboard, Personal AI agent, Real-time transcription tool, Investor onboarding platform, NNS fretboard tool, Swing feel visualizer.
 
@@ -106,6 +137,6 @@ Keep text contrast: body text must stay at 4.5:1 or better over the brightest bl
 
 1. Tokens, fonts, Tailwind theme, shared components (nav, footer, buttons, labels).
 2. Home.
-3. Projects (has the only real interactivity).
+3. `PhotoFrame` (with Home hero), then Projects (has the only real interactivity).
 4. Music, Fitness, Photos.
 5. Responsive pass, accessibility pass (real `<button>` and `<a>`, alt text, contrast), then remove the `design/` folder or keep it as reference.

@@ -73,11 +73,11 @@ export default function SiteNav() {
         {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
 
-      {/* Mobile menu panel */}
+      {/* Mobile menu panel: full-screen takeover below the header */}
       {open ? (
         <nav
           id="mobile-nav-menu"
-          className="glass-nav md:hidden absolute left-0 right-0 top-full border-b border-jazz-line flex flex-col px-6 py-4"
+          className="md:hidden fixed inset-x-0 top-[88px] bottom-0 z-50 bg-jazz-bg/97 backdrop-blur-3xl flex flex-col items-center justify-center gap-2 px-6 overflow-y-auto"
         >
           {links.map((link) => (
             <Link
@@ -85,8 +85,8 @@ export default function SiteNav() {
               href={link.href}
               onClick={() => setOpen(false)}
               className={cn(
-                "font-sans text-lg no-underline py-4 border-b border-jazz-line last:border-b-0",
-                isActive(link.href) ? "text-jazz-fg font-medium" : "text-jazz-muted"
+                "font-serif text-5xl no-underline py-4",
+                isActive(link.href) ? "text-jazz-accent" : "text-jazz-fg"
               )}
             >
               {link.label}
