@@ -1,255 +1,187 @@
-"use client";
+import { cn } from "@/lib/utils";
+import Eyebrow from "../components/site/Eyebrow";
+import MonoLabel from "../components/site/MonoLabel";
+import SectionHeading from "../components/site/SectionHeading";
+import {
+  stats,
+  split,
+  bigThree,
+  goals,
+  recentSessions,
+} from "@/lib/fitness-data";
 
-import Image from "next/image";
-
-function Stat({ label, value }: { label: string; value: string }) {
+function StatTile({ big, label }: { big: string; label: string }) {
   return (
-    <div>
-      <p className="text-xl font-semibold">{value}</p>
-      <p className="text-xs text-muted-foreground">{label}</p>
+    <div className="min-h-[170px] p-6 glass-panel flex flex-col justify-between">
+      <p className="font-serif font-normal text-6xl md:text-[72px] leading-none text-jazz-accent m-0">
+        {big}
+      </p>
+      <p className="font-sans text-sm leading-snug text-jazz-muted m-0">{label}</p>
     </div>
   );
 }
 
 export default function FitnessPage() {
   return (
-    <section className="w-full py-20 bg-white dark:bg-black">
-      <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 md:grid-cols-4 gap-50">
-        {/* LEFT COLUMN (IDENTICAL STRUCTURE TO ABOUT) */}
-        <div className="md:col-span-1">
-          <div className="sticky top-0 h-screen flex flex-col items-center md:items-start pt-20">
-            {/* TITLE */}
-            <h2 className="text-6xl md:text-8xl font-extrabold mb-12 tracking-tight">
-              FITNESS
-            </h2>
-            {/* IMAGE */}
-            <div className="w-full md:w-80 lg:w-90 mb-10">
-              <Image
-                src="/fitness.jpg"
-                alt="Fitness"
-                width={1800}
-                height={2400}
-                className="rounded-xl object-cover shadow-lg"
-              />
-            </div>
-          </div>
+    <>
+      {/* HERO */}
+      <section className="px-6 md:px-20 py-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div className="md:col-span-7 flex flex-col gap-7">
+          <Eyebrow>Strength · Hypertrophy</Eyebrow>
+          <h1 className="font-serif font-normal text-6xl sm:text-7xl md:text-8xl lg:text-[120px] leading-[0.95] text-jazz-fg m-0">
+            Built for the
+            <br />
+            <em className="italic text-jazz-accent">V-taper.</em>
+          </h1>
+          <p className="font-sans text-lg leading-relaxed text-jazz-muted m-0 max-w-xl">
+            Compound-heavy sessions, minimal accessory volume, and a split
+            trimmed to fit real life. Efficiency is the constraint.
+          </p>
         </div>
+        <div className="md:col-span-5 grid grid-cols-2 gap-4">
+          <StatTile big={stats.trainingDaysPerWeek} label="training days a week" />
+          <StatTile big={stats.coreLiftsLabel} label="core lifts: squat, bench, deadlift" />
+          <StatTile big={stats.bodyweightKg} label="current bodyweight, kg" />
+          <StatTile big={stats.yearsTraining} label="years of training" />
+        </div>
+      </section>
 
-        {/* RIGHT COLUMN */}
-        <div className="md:col-span-3 flex flex-col gap-22">
-          <div className="pl-0 md:pl-12">
-            <h2 className="text-4xl font-bold mb-8 border-b-2 border-dotted pb-4">
-              My Mindset
-            </h2>
-            <div className="mb-20 max-w-2xl">
-              <p className="text-muted-foreground leading-relaxed mb-8">
-                Training isn’t a hobby. It’s the system underneath everything —
-                discipline, structure, and long-term progression.
-              </p>
-              <div className="grid grid-cols-3 gap-6 max-w-md pb-2">
-                <Stat label="Weekly training" value="5-6×" />
-                <Stat label="Experience" value="3 yr" />
-                <Stat label="Bodyweight" value="72.6 Kg" />
-              </div>
-              <div className="grid grid-cols-3 gap-6 max-w-md pt-2">
-                <Stat label="Squat PR" value="160kgs x 12" />
-                <Stat label="Deadlift PR" value="205kgs x 1" />
-                <Stat label="Bench Press PR" value="95kgs x 1" />
-              </div>
-            </div>
-
-            {/* TRAINING SPLIT */}
-            <div className="pb-4">
-              <h2 className="text-4xl font-bold mb-8 border-b-2 border-dotted pb-4">
-                Training Split
-              </h2>
-
-              <div className="flex flex-col gap-12 text-muted-foreground">
-                {/* DAY 1: PUSH */}
-                <div>
-                  <p className="text-sm">Monday</p>
-                  <h3 className="text-xl font-semibold text-foreground">
-                    Push — Chest, Shoulders, Triceps
-                  </h3>
-                  <ul className="list-disc pl-5 mt-2 space-y-1">
-                    <li>Flat Bench Press — 1×warmup, 3×working</li>
-                    <li>Incline Dumbbell Press — 3×working</li>
-                    <li>Chest Dips — 3×failure</li>
-                    <li>Overhead Shoulder Press — 1×warmup, 3×working</li>
-                    <li>Lateral Raises — 3×working</li>
-                    <li>Close-Grip Bench Press — 3×working</li>
-                  </ul>
-                </div>
-
-                {/* DAY 2: PULL */}
-                <div>
-                  <p className="text-sm">Tuesday</p>
-                  <h3 className="text-xl font-semibold text-foreground">
-                    Pull — Back, Biceps
-                  </h3>
-                  <ul className="list-disc pl-5 mt-2 space-y-1">
-                    <li>Weighted Pull-ups — 1×warmup, 3×working</li>
-                    <li>Bent-Over Barbell Rows — 3×working</li>
-                    <li>Chest-Supported Machine Rows — 3×working</li>
-                    <li>Face Pulls — 3×working</li>
-                    <li>Preacher Curls — 3×working</li>
-                    <li>Incline Dumbbell Curls — 3×working</li>
-                  </ul>
-                </div>
-
-                {/* DAY 3: LEGS (Quad-Focused) */}
-                <div>
-                  <p className="text-sm">Wednesday</p>
-                  <h3 className="text-xl font-semibold text-foreground">
-                    Legs — Quad-Focused
-                  </h3>
-                  <ul className="list-disc pl-5 mt-2 space-y-1">
-                    <li>Squats — 1×warmup, 6×working</li>
-                    <li>Bulgarian Split Squats (Dumbbells) — 3×working</li>
-                    <li>Slow Tempo Leg Extensions — 3×working</li>
-                    <li>Seated Calf Raises — 3×working</li>
-                  </ul>
-                </div>
-
-                {/* DAY 4: ARMS */}
-                <div>
-                  <p className="text-sm">Thursday</p>
-                  <h3 className="text-xl font-semibold text-foreground">
-                    Arms — Biceps, Triceps, Abs
-                  </h3>
-                  <ul className="list-disc pl-5 mt-2 space-y-1">
-                    <li>EZ Bar Curls — 1×warmup, 3×working</li>
-                    <li>Reverse-Grip Curls — 3×working</li>
-                    <li>Dumbbell Spider Curls — 3×working</li>
-                    <li>Overhead Rope Tricep Extensions — 3×working</li>
-                    <li>Triceps Dips — 3×failure</li>
-                    <li>Hanging Leg Raises — 3×working</li>
-                    <li>Cable Crunches — 3×working</li>
-                  </ul>
-                </div>
-
-                {/* DAY 5: PUSH-PULL HYBRID */}
-                <div>
-                  <p className="text-sm">Friday</p>
-                  <h3 className="text-xl font-semibold text-foreground">
-                    Push-Pull Hybrid — Chest + Back
-                  </h3>
-                  <ul className="list-disc pl-5 mt-2 space-y-1">
-                    <li>Incline Barbell Press — 1×warmup, 3×working</li>
-                    <li>Weighted Chest Dips — 3×working</li>
-                    <li>T-Bar Rows — 3×working</li>
-                    <li>Unilateral Dumbbell Pullover — 3×working</li>
-                    <li>Shrugs (Dumbbell/Barbell) — 3×working</li>
-                  </ul>
-                </div>
-
-                {/* DAY 6: LEGS (Hamstrings, Glutes, Shoulders) */}
-                <div>
-                  <p className="text-sm">Saturday</p>
-                  <h3 className="text-xl font-semibold text-foreground">
-                    Legs — Hamstrings, Glutes, Shoulders
-                  </h3>
-                  <ul className="list-disc pl-5 mt-2 space-y-1">
-                    <li>Romanian Deadlifts — 1×warmup, 3×working</li>
-                    <li>Conventional Deadlifts — 1×warmup, 3×working</li>
-                    <li>Nordic Hamstring Curls — 3×working</li>
-                    <li>Hip Thrusts — 3×working</li>
-                    <li>Seated Overhead Shoulder Press — 3×working</li>
-                    <li>Rear Deltoid Flys — 3×working</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* PHILOSOPHY */}
-            <div className="pb-4">
-              <h2 className="text-4xl font-bold mb-8 border-b-2 border-dotted pb-4">
-                Philosophy
-              </h2>
-
-              <div className="text-muted-foreground space-y-4">
-                <p>
-                  I follow a hybrid model — hypertrophy-focused lifting with
-                  conditioning layered in. No crash dieting, no extremes.
+      {/* SPLIT */}
+      <section className="border-t border-jazz-line px-6 md:px-20 py-20">
+        <div className="flex flex-col gap-10">
+          <SectionHeading eyebrow="01 — The split" title="Seven days, five sessions" />
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4">
+            {split.map((day) => (
+              <div
+                key={day.day}
+                className={cn(
+                  "min-h-[220px] p-5 flex flex-col",
+                  day.rest ? "glass-soft" : "glass-panel"
+                )}
+              >
+                <p
+                  className={cn(
+                    "font-mono text-xs uppercase tracking-[0.12em] m-0",
+                    day.rest ? "text-jazz-muted" : "text-jazz-accent"
+                  )}
+                >
+                  {day.day}
                 </p>
-
-                <ul className="list-disc pl-5 space-y-2">
-                  <li>
-                    <strong className="text-foreground">
-                      Consistency over intensity
-                    </strong>{" "}
-                    — showing up wins
-                  </li>
-                  <li>
-                    <strong className="text-foreground">
-                      Progressive overload
-                    </strong>{" "}
-                    — always improve
-                  </li>
-                  <li>
-                    <strong className="text-foreground">
-                      Sleep is critical
-                    </strong>{" "}
-                    — recovery builds muscle
-                  </li>
-                  <li>
-                    <strong className="text-foreground">
-                      Enjoy the process
-                    </strong>{" "}
-                    — sustainability &gt; perfection
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* NUTRITION */}
-            <div className="pb-4">
-              <h2 className="text-4xl font-bold mb-8 border-b-2 border-dashed pb-4">
-                Nutrition
-              </h2>
-
-              <div className="grid md:grid-cols-2 gap-10 text-muted-foreground">
-                <div className="space-y-3">
-                  <p className="font-semibold text-foreground">Approach</p>
-                  <p>
-                    Lean bulk with ~200–300 kcal surplus. Focus on whole foods.
+                <h3
+                  className={cn(
+                    "font-serif font-normal text-3xl leading-none m-0 mt-auto",
+                    day.rest ? "text-jazz-muted" : "text-jazz-fg"
+                  )}
+                >
+                  {day.label}
+                </h3>
+                {day.rest ? (
+                  <p className="font-sans text-sm leading-snug text-jazz-muted m-0 mt-2">
+                    Recover.
                   </p>
-
-                  <p className="font-semibold text-foreground mt-4">
-                    Daily Structure
-                  </p>
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Oats + eggs</li>
-                    <li>Chicken + rice</li>
-                    <li>Yogurt snack</li>
-                    <li>Whey post workout</li>
-                    <li>Meat + carbs dinner</li>
-                  </ul>
-                </div>
-
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between border-b pb-2">
-                    <span>Protein</span>
-                    <span className="font-medium">140g</span>
-                  </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span>Carbs</span>
-                    <span className="font-medium">250g</span>
-                  </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span>Fats</span>
-                    <span className="font-medium">70g</span>
-                  </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span>Calories</span>
-                    <span className="font-medium">2150</span>
-                  </div>
-                </div>
+                ) : (
+                  <>
+                    <MonoLabel className="mt-3">Anchor</MonoLabel>
+                    <p className="font-sans text-[15px] leading-snug text-jazz-fg m-0 mt-1">
+                      {day.anchor}
+                    </p>
+                  </>
+                )}
               </div>
-            </div>
+            ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* BIG THREE */}
+      <section className="border-t border-jazz-line px-6 md:px-20 py-20">
+        <div className="flex flex-col gap-10">
+          <SectionHeading eyebrow="02 — The big three" title="Bench, squat, deadlift" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {bigThree.map((lift) => (
+              <article
+                key={lift.name}
+                className="min-h-[340px] p-8 glass-panel flex flex-col"
+              >
+                <Eyebrow>{lift.dayLabel}</Eyebrow>
+                <h3 className="font-serif font-normal text-5xl md:text-[56px] leading-none text-jazz-fg m-0 mt-3">
+                  {lift.name}
+                </h3>
+                <MonoLabel className="mt-auto">Personal best</MonoLabel>
+                <p className="font-serif font-normal text-6xl md:text-[72px] leading-none text-jazz-fg m-0 mt-1">
+                  {lift.bestWeightKg}{" "}
+                  <span className="font-mono text-base uppercase tracking-[0.12em] text-jazz-muted">
+                    kg
+                  </span>
+                </p>
+                <div className="mt-5 pt-4 border-t border-jazz-line">
+                  <p className="font-sans text-sm leading-relaxed text-jazz-muted m-0">
+                    Best set: {lift.bestSet}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* GOALS */}
+      <section className="border-t border-jazz-line px-6 md:px-20 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <div className="md:col-span-3">
+            <Eyebrow>03 — Goals</Eyebrow>
+          </div>
+          <div className="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {goals.map((goal) => (
+              <div key={goal.numeral} className="flex flex-col gap-3 pt-6 border-t border-jazz-line">
+                <Eyebrow>{goal.numeral}</Eyebrow>
+                <h3 className="font-serif font-normal text-[34px] leading-[1.1] text-jazz-fg m-0">
+                  {goal.title}
+                </h3>
+                <p className="font-sans text-[15px] leading-relaxed text-jazz-muted m-0">
+                  {goal.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* LOG */}
+      <section className="border-t border-jazz-line px-6 md:px-20 py-20">
+        <div className="flex flex-col gap-10">
+          <SectionHeading eyebrow="04 — Log" title="Recent sessions" />
+          <div className="border-b border-jazz-line">
+            <div className="hidden md:grid grid-cols-[130px_110px_minmax(0,1fr)_140px_120px_minmax(0,1.2fr)] gap-4 h-12 items-center">
+              <MonoLabel>Date</MonoLabel>
+              <MonoLabel>Session</MonoLabel>
+              <MonoLabel>Lift</MonoLabel>
+              <MonoLabel>Sets × reps</MonoLabel>
+              <MonoLabel>Weight</MonoLabel>
+              <MonoLabel>Notes</MonoLabel>
+            </div>
+            {recentSessions.length === 0 ? (
+              <p className="font-sans text-base leading-relaxed text-jazz-muted py-10 border-t border-jazz-line">
+                No sessions logged yet.
+              </p>
+            ) : (
+              recentSessions.map((entry, i) => (
+                <div
+                  key={i}
+                  className="grid grid-cols-2 md:grid-cols-[130px_110px_minmax(0,1fr)_140px_120px_minmax(0,1.2fr)] gap-2 md:gap-4 py-4 md:h-16 md:items-center border-t border-jazz-line"
+                >
+                  <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.date}</p>
+                  <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.session}</p>
+                  <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.lift}</p>
+                  <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.setsReps}</p>
+                  <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.weight}</p>
+                  <p className="font-sans text-base leading-snug text-jazz-muted m-0">{entry.notes}</p>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

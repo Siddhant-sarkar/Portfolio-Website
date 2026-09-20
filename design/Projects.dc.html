@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sid Sarkar — Projects</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0E0C0A;}
+*{box-sizing:border-box;}
+a{color:inherit;}
+a:hover{opacity:.78;}
+@keyframes blobM1{0%{transform:translate3d(0,0,0) scale(.3) rotate(0deg);opacity:0;}10%{opacity:.55;}30%{transform:translate3d(-180px,120px,0) scale(1) rotate(40deg);opacity:.55;}55%{transform:translate3d(120px,220px,0) scale(1.2) rotate(110deg);opacity:.45;}80%{transform:translate3d(260px,-60px,0) scale(.9) rotate(190deg);opacity:.5;}100%{transform:translate3d(300px,-140px,0) scale(.2) rotate(240deg);opacity:0;}}
+@keyframes blobM2{0%{transform:translate3d(0,0,0) scale(.4) rotate(0deg);opacity:0;}14%{opacity:.5;}35%{transform:translate3d(200px,-140px,0) scale(1.1) rotate(-50deg);opacity:.5;}48%{opacity:0;}52%{transform:translate3d(260px,-60px,0) scale(.5) rotate(-70deg);opacity:0;}64%{opacity:.5;}86%{transform:translate3d(-60px,120px,0) scale(1.3) rotate(-140deg);opacity:.45;}100%{transform:translate3d(-160px,200px,0) scale(.3) rotate(-200deg);opacity:0;}}
+@keyframes blobM3{0%{transform:translate3d(0,0,0) scale(.2) rotate(0deg);opacity:0;}8%{opacity:.6;}25%{transform:translate3d(140px,-200px,0) scale(1) rotate(60deg);opacity:.6;}50%{transform:translate3d(-120px,-120px,0) scale(1.4) rotate(150deg);opacity:.5;}72%{transform:translate3d(-260px,80px,0) scale(.8) rotate(230deg);opacity:.55;}100%{transform:translate3d(-80px,240px,0) scale(.1) rotate(300deg);opacity:0;}}
+@keyframes blobM4{0%{transform:translate3d(0,0,0) scale(.5) rotate(0deg);opacity:0;}18%{transform:translate3d(-140px,-100px,0) scale(1) rotate(30deg);opacity:.5;}40%{transform:translate3d(-300px,40px,0) scale(1.2) rotate(90deg);opacity:.5;}58%{opacity:.05;}62%{transform:translate3d(-120px,180px,0) scale(.7) rotate(120deg);opacity:0;}75%{opacity:.5;}92%{transform:translate3d(100px,80px,0) scale(1.1) rotate(200deg);opacity:.45;}100%{transform:translate3d(180px,-40px,0) scale(.3) rotate(230deg);opacity:0;}}
+@keyframes blobR1{0%,100%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;}25%{border-radius:30% 60% 70% 40% / 50% 60% 30% 60%;}50%{border-radius:50% 60% 30% 60% / 30% 60% 70% 40%;}75%{border-radius:65% 35% 55% 45% / 40% 70% 30% 60%;}}
+@keyframes blobR2{0%,100%{border-radius:40% 60% 65% 35% / 45% 35% 65% 55%;}33%{border-radius:70% 30% 45% 55% / 60% 50% 50% 40%;}66%{border-radius:35% 65% 30% 70% / 30% 65% 35% 70%;}}
+.blob{opacity:0;filter:blur(44px);will-change:transform,opacity;}
+.b1{animation:blobM1 30s ease-in-out -8s infinite, blobR1 17s ease-in-out infinite;}
+.b2{animation:blobM2 36s ease-in-out -20s infinite, blobR2 21s ease-in-out -5s infinite;}
+.b3{animation:blobM3 24s ease-in-out -4s infinite, blobR1 13s ease-in-out -9s infinite;}
+.b4{animation:blobM4 32s ease-in-out -14s infinite, blobR2 19s ease-in-out -2s infinite;}
+.b5{animation:blobM2 27s ease-in-out -2s infinite, blobR1 15s ease-in-out -11s infinite;}
+.b6{animation:blobM4 40s ease-in-out -25s infinite, blobR2 23s ease-in-out -7s infinite;}
+@media (prefers-reduced-motion: reduce){.blob{animation:none;opacity:.3;}}
+</style>
+</helmet>
+<div style="width:1440px;height:1860px;background:#0E0C0A;color:#F1E9D8;font-family:'DM Sans', system-ui, sans-serif;display:flex;flex-direction:column;overflow:hidden;">
+<div aria-hidden="true" style="position:fixed;top:0;left:0;width:100%;height:900px;overflow:hidden;z-index:0;pointer-events:none;"><div class="blob b1" style="position:absolute;left:880px;top:40px;width:520px;height:460px;background:{{accent}};"></div><div class="blob b2" style="position:absolute;left:-180px;top:380px;width:620px;height:560px;background:#7A4B26;"></div><div class="blob b3" style="position:absolute;left:540px;top:500px;width:380px;height:340px;background:#C4693F;"></div><div class="blob b4" style="position:absolute;left:1120px;top:540px;width:300px;height:340px;background:{{accent}};"></div><div class="blob b5" style="position:absolute;left:260px;top:30px;width:280px;height:260px;background:#5E4630;"></div><div class="blob b6" style="position:absolute;left:760px;top:300px;width:360px;height:320px;background:#7A4B26;"></div></div>
+<header style="position:relative;z-index:1;background-color:rgba(255,236,208,.07);backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);height:88px;flex-shrink:0;box-sizing:border-box;padding:0 80px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,238,215,.12);">
+<a href="Main.dc.html" style="display:flex;align-items:baseline;gap:14px;text-decoration:none;color:#F1E9D8;"><span style="font-family:'Instrument Serif', 'Times New Roman', serif;font-size:32px;line-height:1;">Sid Sarkar</span><span style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#A89D8A;margin:0;">Dev · Guitar</span></a>
+<nav style="display:flex;gap:40px;align-items:center;"><a href="Main.dc.html" style="font-family:'DM Sans', system-ui, sans-serif;font-size:16px;color:#A89D8A;text-decoration:none;padding:12px 0;border-bottom:2px solid transparent;">Home</a><a href="Music.dc.html" style="font-family:'DM Sans', system-ui, sans-serif;font-size:16px;color:#A89D8A;text-decoration:none;padding:12px 0;border-bottom:2px solid transparent;">Music</a><a href="Fitness.dc.html" style="font-family:'DM Sans', system-ui, sans-serif;font-size:16px;color:#A89D8A;text-decoration:none;padding:12px 0;border-bottom:2px solid transparent;">Fitness</a><a href="Projects.dc.html" style="font-family:'DM Sans', system-ui, sans-serif;font-size:16px;font-weight:500;color:#F1E9D8;text-decoration:none;padding:12px 0;border-bottom:2px solid {{accent}};">Projects</a><a href="Photos.dc.html" style="font-family:'DM Sans', system-ui, sans-serif;font-size:16px;color:#A89D8A;text-decoration:none;padding:12px 0;border-bottom:2px solid transparent;">Photos</a></nav>
+</header><section style="position:relative;z-index:1;height:440px;flex-shrink:0;box-sizing:border-box;padding:0 80px;">
+<div style="display:flex;flex-direction:column;justify-content:flex-end;gap:32px;height:100%;padding-bottom:56px;">
+<div style="display:grid;grid-template-columns:repeat(12, minmax(0,1fr));column-gap:24px;align-items:end;">
+<div style="grid-column:1 / span 8;display:flex;flex-direction:column;gap:28px;">
+<p style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:{{accent}};margin:0;">Selected work</p>
+<h1 style="font-family:'Instrument Serif', 'Times New Roman', serif;font-size:128px;line-height:0.95;font-weight:400;color:#F1E9D8;margin:0;">Projects</h1>
+</div>
+<p style="grid-column:9 / span 4;font-family:'DM Sans', system-ui, sans-serif;font-size:18px;line-height:1.6;color:#A89D8A;margin:0;">Web apps, data tools and practice aids. Mostly things I wanted to exist.</p>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;">
+<div style="display:flex;gap:12px;">
+<sc-for list="{{chips}}" as="chip" hint-placeholder-count="4">
+<sc-if value="{{chip.active}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{chip.pick}}" style="height:44px;padding:0 20px;box-sizing:border-box;border:1px solid {{accent}};background:{{accent}};color:#14100B;border-radius:999px;font-family:'DM Sans', system-ui, sans-serif;font-size:15px;font-weight:600;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.55);">{{chip.label}}</button></sc-if>
+<sc-if value="{{chip.inactive}}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{chip.pick}}" style="height:44px;padding:0 20px;box-sizing:border-box;border:1px solid rgba(255,240,222,.42);background-color:rgba(255,240,222,.10);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:#F1E9D8;border-radius:999px;font-family:'DM Sans', system-ui, sans-serif;font-size:15px;cursor:pointer;">{{chip.label}}</button></sc-if>
+</sc-for>
+</div>
+<p style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#A89D8A;margin:0;">{{count}}</p>
+</div>
+</div>
+</section><section style="position:relative;z-index:1;height:1192px;flex-shrink:0;box-sizing:border-box;padding:20px 80px 100px;">
+<div style="display:grid;grid-template-columns:repeat(3, minmax(0,1fr));grid-auto-rows:520px;gap:32px;">
+<sc-for list="{{cards}}" as="card" hint-placeholder-count="6">
+<article style="height:520px;box-sizing:border-box;background-color:rgba(255,236,208,.09);background-image:linear-gradient(135deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.03) 42%, rgba(255,255,255,.07) 100%);backdrop-filter:blur(26px) saturate(170%);-webkit-backdrop-filter:blur(26px) saturate(170%);border:1px solid rgba(255,244,228,.26);border-radius:22px;box-shadow:inset 0 1px 0 rgba(255,255,255,.42),inset 0 -1px 0 rgba(255,255,255,.08),inset 1px 0 0 rgba(255,255,255,.14),0 14px 40px rgba(24,12,3,.34);display:flex;flex-direction:column;overflow:hidden;">
+<div style="height:180px;flex-shrink:0;box-sizing:border-box;background-color:rgba(255,232,200,.06);background-image:repeating-linear-gradient(135deg, transparent 0 14px, rgba(255,240,220,.07) 14px 15px);border-bottom:1px solid rgba(255,238,215,.12);display:flex;align-items:flex-end;padding:16px 20px;"><span style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#A89D8A;margin:0;">[Screenshot]</span></div>
+<div style="flex-grow:1;padding:28px;display:flex;flex-direction:column;gap:12px;">
+<p style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:{{accent}};margin:0;">{{card.cat}}</p>
+<h3 style="font-family:'Instrument Serif', 'Times New Roman', serif;font-size:32px;line-height:1.08;font-weight:400;color:#F1E9D8;margin:0;">{{card.title}}</h3>
+<p style="font-family:'DM Sans', system-ui, sans-serif;font-size:15px;line-height:1.55;color:#A89D8A;margin:0;">{{card.desc}}</p>
+<div style="margin-top:auto;display:flex;flex-direction:column;gap:16px;">
+<div style="display:flex;flex-wrap:wrap;gap:8px;">
+<sc-for list="{{card.tags}}" as="tag" hint-placeholder-count="3"><span style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#A89D8A;margin:0;padding:6px 10px;background:rgba(255,240,220,.07);border:1px solid rgba(255,238,215,.12);border-radius:999px;">{{tag.label}}</span></sc-for>
+</div>
+<a href="#" style="font-family:'IBM Plex Mono', ui-monospace, monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#F1E9D8;margin:0;text-decoration:none;">View project →</a>
+</div>
+</div>
+</article>
+</sc-for>
+</div>
+</section><footer style="position:relative;z-index:1;height:140px;flex-shrink:0;box-sizing:border-box;padding:0 80px;border-top:1px solid rgba(255,238,215,.12);display:flex;align-items:center;justify-content:space-between;">
+<p style="font-family:'DM Sans', system-ui, sans-serif;font-size:14px;line-height:1.6;color:#A89D8A;margin:0;">© 2026 Siddhant Sarkar · Hamburg, Germany</p>
+<div style="display:flex;gap:32px;"><a href="Music.dc.html" style="font-family:'DM Sans', system-ui, sans-serif;font-size:14px;line-height:1.6;color:#A89D8A;margin:0;text-decoration:none;">Music</a><a href="Fitness.dc.html" style="font-family:'DM Sans', system-ui, sans-serif;font-size:14px;line-height:1.6;color:#A89D8A;margin:0;text-decoration:none;">Fitness</a><a href="Projects.dc.html" style="font-family:'DM Sans', system-ui, sans-serif;font-size:14px;line-height:1.6;color:#A89D8A;margin:0;text-decoration:none;">Projects</a><a href="Photos.dc.html" style="font-family:'DM Sans', system-ui, sans-serif;font-size:14px;line-height:1.6;color:#A89D8A;margin:0;text-decoration:none;">Photos</a></div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#DBA54A","options":["#DBA54A","#D0694F","#86AEBF","#A3C48F"]},"$preview":{"width":1440,"height":1860}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const filter = (this.state && this.state.filter) || 'All';
+    const all = [
+      { cat: 'Web', title: 'Life-tracking dashboard', desc: 'Habits, goals and achievements in one place, with PWA support for the phone. Replaces a physical notebook and the Telegram agent before it.', tags: ['Next.js', 'Turso', 'Vercel', 'PWA'] },
+      { cat: 'Data & ML', title: 'Personal AI agent', desc: 'Daily life tracking from a Telegram chat: food, spending, fitness and habits, powered by the Anthropic API and stored in SQLite.', tags: ['Python', 'Telegram', 'SQLite', 'Anthropic API'] },
+      { cat: 'Web', title: 'Real-time transcription tool', desc: 'Collaborative Q&A notes for client meetings, synced live over SSE. Audio transcription with Deepgram is the next phase.', tags: ['Next.js', 'Go', 'PostgreSQL', 'NATS', 'Docker'] },
+      { cat: 'Web', title: 'Investor onboarding platform', desc: 'Verification workflow with automated web enrichment, regulatory register lookups and fuzzy name matching.', tags: ['React', 'Node.js', 'BullMQ', 'Redis'] },
+      { cat: 'Music tools', title: 'NNS fretboard tool', desc: 'A Nashville Number System navigator that maps diatonic chord positions across the neck in a windowed view.', tags: ['HTML Canvas'] },
+      { cat: 'Music tools', title: 'Swing feel visualizer', desc: 'An interactive beat visualizer for practising swing feel and comping against the bar.', tags: ['Interactive', 'Practice tool'] }
+    ];
+    const cats = ['All', 'Web', 'Data & ML', 'Music tools'];
+    const chips = cats.map((c) => ({
+      label: c,
+      active: c === filter,
+      inactive: c !== filter,
+      pick: () => this.setState({ filter: c })
+    }));
+    const cards = all
+      .filter((c) => filter === 'All' || c.cat === filter)
+      .map((c) => ({ cat: c.cat, title: c.title, desc: c.desc, tags: c.tags.map((t) => ({ label: t })) }));
+    const n = cards.length;
+    return {
+      accent: this.props.accent ?? '#DBA54A',
+      chips,
+      cards,
+      count: 'Showing ' + n + (n === 1 ? ' project' : ' projects')
+    };
+  }
+}
+</script>
+</body>
+</html>
