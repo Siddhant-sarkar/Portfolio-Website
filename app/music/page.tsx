@@ -5,7 +5,6 @@ import Image from "next/image";
 type SoloOrRiff = {
   src: string;
   caption: string;
-  youtubeEmbedUrl?: string;
 };
 
 function isYouTubeUrl(url: string) {
@@ -64,26 +63,26 @@ const solosAndRiffs: SoloOrRiff[] = [
       "My take on iconic solo of `Hotel California` by The Eagles, Harmonic minor and Pentatonic scales over the original chord progression.",
   },
   {
-    src: "https://www.youtube.com/embed/RUwrU-GXGoo?si=y_HilgiYPh9EW46Y",
+    src: "/music_page/solo-2.mp4",
     caption:
       "Random Jam session with my band The Guild, I shreaded a solo over.",
   },
   {
-    src: "https://www.youtube.com/embed/jfbyVzeew7k?si=oIlYLDRTUfyW1ZkI",
+    src: "/music_page/solo-3.mp4",
     caption:
       "It was snowing outside, so I decided to record a improvise a little bit.",
   },
   {
-    src: "https://www.youtube.com/embed/nsDXuYq0t80?si=TTRGUY4TS3vFZWNz",
+    src: "/music_page/solo-5.mp4",
     caption: "My Solo over a song Dört Duvar by Canby and Wolker.",
   },
   {
-    src: "https://www.youtube.com/embed/14jBeJxfov4?si=RC8PNXfhtPsA8kQY",
+    src: "/music_page/solo-1.mp4",
     caption: "Flamenco style solo over a classical Am - G - F -E progression.",
   },
   {
-    src: "https://www.youtube.com/embed/yMGigJifaBQ?si=pKxFzpioohdVKx8E",
-    caption: "If the song `HEartless` by the Weeknd had a guitar solo.",
+    src: "/music_page/solo-4.mp4",
+    caption: "If the song `Heartless` by the Weeknd had a guitar solo.",
   },
 ];
 
@@ -149,11 +148,9 @@ export default function MusicPage() {
               <div className="flex flex-col gap-8 text-muted-foreground">
                 {solosAndRiffs.map((video) =>
                   (() => {
-                    const embedSrc =
-                      video.youtubeEmbedUrl ??
-                      (isYouTubeUrl(video.src)
-                        ? toYouTubeEmbedUrl(video.src)
-                        : undefined);
+                    const embedSrc = isYouTubeUrl(video.src)
+                      ? toYouTubeEmbedUrl(video.src)
+                      : undefined;
 
                     return (
                       <figure key={video.src} className="space-y-3">
